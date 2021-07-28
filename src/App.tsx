@@ -1,16 +1,17 @@
-import React from 'react';
-import './App.css';
-import { Stage, Layer, Rect, Circle } from 'react-konva';
-import { Upgrade } from './upgrade/Upgrade';
-import { Upgrade as UpgradeType } from './upgrade/types';
+import React from "react";
+import "./App.css";
+import { Stage, Layer, Rect, Circle } from "react-konva";
+import { Upgrade } from "./upgrade/Upgrade";
+import { Upgrade as UpgradeType } from "./upgrade/types";
 
 const upgrade: UpgradeType = {
-  name: 'Open Envelope',
-  description: 'An advanced robot that we sourced from the future, capable or opening envelopes at lightning speed.',
-  cost: 3.50,
+  name: "Open Envelope",
+  description:
+    "An advanced robot that we sourced from the future, capable or opening envelopes at lightning speed.",
+  cost: 3.5,
   isPurchased: false,
-  apply: () => { }
-}
+  apply: () => { },
+};
 
 function App() {
   return (
@@ -23,8 +24,8 @@ function App() {
           upgrade={upgrade}
           x={100}
           y={100}
-          onPurchase={() => console.log('purchased')}
-          onRefund={() => console.log('refunded')}
+          onPurchase={() => console.log("purchased")}
+          onRefund={() => console.log("refunded")}
         />
       </Layer>
       {/* <Layer>
