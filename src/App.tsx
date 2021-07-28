@@ -1,6 +1,14 @@
 import React from 'react';
 import './App.css';
 import { Stage, Layer, Rect, Circle } from 'react-konva';
+import { Upgrade } from './upgrade/Upgrade';
+
+const upgrade = {
+  name: 'Open Envelope',
+  cost: 3.50,
+  isPurchased: false,
+  apply: () => { }
+}
 
 function App() {
   return (
@@ -9,14 +17,12 @@ function App() {
     // Rect and Circle are not DOM elements. They are 2d shapes on canvas
     <Stage width={window.innerWidth} height={window.innerHeight}>
       <Layer>
-        <Rect width={50} height={50} fill="red" onClick={() => alert('clicked rect 1')} />
-        <Circle x={200} y={200} stroke="black" radius={50} onClick={() => alert('clicked circle 1')} />
+        <Upgrade upgrade={upgrade} x={100} y={100} />
       </Layer>
-
-      <Layer>
+      {/* <Layer>
         <Rect x={100} width={50} height={50} fill="red" onClick={() => alert('clicked rect 2')} />
         <Circle x={400} y={200} stroke="black" radius={50} onClick={() => alert('clicked circle 2')} />
-      </Layer>
+      </Layer> */}
     </Stage>
   );
 }
