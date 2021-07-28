@@ -25,8 +25,8 @@ export const Button: FunctionComponent<ButtonProps> = ({
   textColor = CarmaTheme.font.color.white,
   x,
   y,
-  width = 100,
-  height = 100,
+  width = 120,
+  height = 40,
   onClick,
 }) => {
   const [hovering, setHovering] = useState(false);
