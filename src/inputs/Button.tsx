@@ -1,4 +1,4 @@
-import {FunctionComponent, useState} from "react";
+import {useState} from "react";
 import {KonvaNodeEvents, Rect, Text} from "react-konva";
 import Konva from "konva";
 import { CarmaTheme } from '../theme/CarmaTheme';
@@ -11,15 +11,15 @@ type ShapeProps = {
 }
 
 type ButtonProps = {
-  children: string | undefined;
+  label: string | undefined;
   onClick: KonvaNodeEvents['onClick'];
   backgroundColor?: string;
   backgroundColorHover?: string;
   textColor?: string;
 } & ShapeProps;
 
-export const Button: FunctionComponent<ButtonProps> = ({
-  children,
+export const Button = ({
+  label,
   backgroundColor = CarmaTheme.color.callToAction,
   backgroundColorHover = CarmaTheme.color.callToActionInteractive,
   textColor = CarmaTheme.font.color.white,
@@ -28,7 +28,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
   width = 120,
   height = 40,
   onClick,
-}) => {
+}: ButtonProps) => {
   const [hovering, setHovering] = useState(false);
   const [clicking, setClicking] = useState(false);
 
@@ -90,7 +90,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
         listening={false}
       />
       <Text
-        text={children}
+        text={label}
         fontFamily={CarmaTheme.font.family}
         fontStyle="bold"
         width={finalWidth}

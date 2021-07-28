@@ -151,9 +151,8 @@ const UpgradeButton = ({
       y={buttonY}
       width={buttonWidth}
       height={buttonHeight}
-    >
-      {upgrade.isPurchased ? 'Refund' : 'Purchase'}
-    </Button>
+      label={upgrade.isPurchased ? 'Refund' : 'Purchase'}
+    />
   );
 };
 

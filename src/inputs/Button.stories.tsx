@@ -15,7 +15,7 @@ const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
-  children: 'Button',
+  label: 'Button',
   onClick: () => console.log('clicked button'),
   x: 50,
   y: 50,

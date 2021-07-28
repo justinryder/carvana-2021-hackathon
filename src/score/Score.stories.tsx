@@ -32,17 +32,15 @@ export const Primary: ComponentStory<typeof Score> = (args) => {
           onClick={() => dispatch(ScoreActions.upgradePurchased(cost))}
           x={5 + 125 * index}
           y={200}
-        >
-          {`Purchase Upgrade ($${cost})`}
-        </Button>
+          label={`Purchase Upgrade ($${cost})`}
+        />
       )}
       <Button
         onClick={() => dispatch(ScoreActions.packetCompleted())}
         x={5}
         y={250}
-      >
-        Complete Packet
-      </Button>
+        label="Complete Packet"
+      />
     </>
   );
 }
