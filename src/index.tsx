@@ -1,15 +1,17 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
 import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
 
-const canvas = document.getElementById("canvas");
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
 
-if (!canvas) {
-  console.log('uh oh.... no canvas! this is a canvvas hackathon how do we do somethign w/o a canvas?!?!?!fawnsjfha sfka');
-}
-
-// @ts-ignore
-const ctx = canvas.getContext("2d");
-ctx.font = "34px serif";
-ctx.textAlign = "center";
-ctx.textBaseline="middle";
-ctx.fillStyle = "#FFF";
-ctx.fillText("Hello World",150,50);
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
