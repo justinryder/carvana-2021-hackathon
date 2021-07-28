@@ -24,12 +24,12 @@ export type FontColor = {
 export type CarmaFontColor = keyof FontColor;
 
 export type FontSize = {
-  small: string;
-  normal: string;
-  medium: string;
-  large: string;
-  xlarge: string;
-  xxlarge: string;
+  small: number;
+  normal: number;
+  medium: number;
+  large: number;
+  xlarge: number;
+  xxlarge: number;
 };
 
 export type Font = {
@@ -40,14 +40,14 @@ export type Font = {
 };
 
 export type Spacing = {
-  xxsmall: string;
-  xsmall: string;
-  small: string;
-  normal: string;
-  medium: string;
-  large: string;
-  xlarge: string;
-  xxlarge: string;
+  xxsmall: number;
+  xsmall: number;
+  small: number;
+  normal: number;
+  medium: number;
+  large: number;
+  xlarge: number;
+  xxlarge: number;
 };
 
 export type TeamColor = {
@@ -86,22 +86,14 @@ export type Color = {
 
 export type CarmaColor = Exclude<keyof Color, 'font' | 'team'>;
 
-export type Breakpoints = {
-  small: string;
-  medium: string;
-  large: string;
-  xlarge: string;
-};
-
 export type CarmaThemeType = CarmaTheme;
 
 export type CarmaTheme = {
   font: Font;
-  breakpoints: Breakpoints;
   spacing: Spacing;
   color: Color;
   border: string;
-  borderRadius: string;
+  borderRadius: number;
   boxShadow: string;
   boxShadowDeeper: string;
 };

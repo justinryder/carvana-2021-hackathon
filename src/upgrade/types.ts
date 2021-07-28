@@ -1,6 +1,7 @@
 export type Upgrade = {
   cost: number;
   name: string;
+  description?: string;
   prerequisite?: Upgrade;
   isPurchased: boolean;
   apply: UpgradeFunction;
@@ -17,7 +18,7 @@ export type UpgradeFunction = (state: any) => any;
  *  * reg packets
  *  * trades
  *  * fin ops (checks)
- *  * blue folders 
+ *  * blue folders
  * OCR for each step
- * Hiring an employee 
+ * Hiring an employee
  */
