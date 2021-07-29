@@ -1,15 +1,9 @@
-import { FunctionComponent } from 'react';
-import { Rect, Text } from 'react-konva';
-import { Upgrade as UpgradeType} from './types';
-import {CarmaTheme} from "../theme/CarmaTheme";
-import {Button} from "../inputs/Button";
-
-type ShapeProps = {
-  x: number;
-  y: number;
-  width?: number;
-  height?: number;
-}
+import { FunctionComponent } from "react";
+import { Rect, Text } from "react-konva";
+import { Upgrade as UpgradeType } from "./types";
+import { CarmaTheme } from "../theme/CarmaTheme";
+import { Button } from "../inputs/Button";
+import { ShapeProps } from "../types/shapes";
 
 type UpgradeProps = {
   upgrade: UpgradeType;
@@ -49,7 +43,7 @@ const UpgradeName = ({
   return (
     <Text
       text={upgrade.name.toUpperCase()}
-      width={width - (2 * padding)}
+      width={width - 2 * padding}
       height={titleHeight}
       x={left + padding}
       y={top + padding}
@@ -62,9 +56,9 @@ const UpgradeName = ({
   );
 };
 
-const currencyFormatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
+const currencyFormatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
 });
 
 const UpgradeCost = ({
@@ -82,7 +76,7 @@ const UpgradeCost = ({
   return (
     <Text
       text={currencyFormatter.format(upgrade.cost)}
-      width={width - (2 * padding)}
+      width={width - 2 * padding}
       x={left + padding}
       y={top + padding}
       fontFamily={CarmaTheme.font.family}
@@ -106,15 +100,14 @@ const UpgradeDescription = ({
   height,
   padding,
 }: UpgradeInternalProps) => {
-  const yOffset = (2 * padding) + titleHeight;
+  const yOffset = 2 * padding + titleHeight;
   const y = top + yOffset;
-  const bottomOffset = (2 * padding) + buttonHeight;
-
+  const bottomOffset = 2 * padding + buttonHeight;
 
   return (
     <Text
       text={upgrade.description}
-      width={width - (2 * padding)}
+      width={width - 2 * padding}
       height={height - yOffset - bottomOffset}
       x={left + padding}
       y={y}
@@ -140,7 +133,7 @@ const UpgradeButton = ({
   height,
   padding,
 }: UpgradeInternalProps) => {
-  const buttonWidth = width - (2 * padding);
+  const buttonWidth = width - 2 * padding;
   const buttonX = left + padding;
   const buttonY = bottom - padding - buttonHeight;
 
@@ -151,7 +144,7 @@ const UpgradeButton = ({
       y={buttonY}
       width={buttonWidth}
       height={buttonHeight}
-      label={upgrade.isPurchased ? 'Refund' : 'Purchase'}
+      label={upgrade.isPurchased ? "Refund" : "Purchase"}
     />
   );
 };
@@ -199,7 +192,7 @@ export const Upgrade: FunctionComponent<UpgradeProps> = ({
       <UpgradeDescription {...internalProps} />
       <UpgradeButton {...internalProps} />
     </>
-  )
+  );
 };
 
 /**
