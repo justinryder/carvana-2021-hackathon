@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { Rect, Text } from "react-konva";
+import {Group, Rect, Text} from "react-konva";
 import { Upgrade as UpgradeType } from "./types";
 import { CarmaTheme } from "../theme/CarmaTheme";
 import { Button } from "../inputs/Button";
@@ -126,8 +126,8 @@ export const Upgrade: FunctionComponent<UpgradeProps> = ({
   };
 
   const bounds = padBox({
-    x,
-    y,
+    x: 0,
+    y: 0,
     width,
     height,
   }, padding);
@@ -165,14 +165,19 @@ export const Upgrade: FunctionComponent<UpgradeProps> = ({
   });
 
   return (
-    <>
+    <Group
+      x={x}
+      y={y}
+      width={width}
+      height={height}
+    >
       <Rect
         width={width}
         height={height}
         fill={CarmaTheme.color.background}
         stroke={CarmaTheme.color.border}
-        x={x}
-        y={y}
+        x={0}
+        y={0}
       />
       <UpgradeName
         {...internalProps}
@@ -190,7 +195,7 @@ export const Upgrade: FunctionComponent<UpgradeProps> = ({
         {...internalProps}
         bounds={buttonBounds}
       />
-    </>
+    </Group>
   )
 };
 
