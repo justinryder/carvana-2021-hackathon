@@ -2,20 +2,17 @@ import React, {useReducer} from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { Score } from './Score';
-import { Score as ScoreType } from './types';
 import {initialState, scoreReducer} from "./scoreReducer";
 import {Button} from "../inputs/Button";
 import ScoreActions from "./ScoreActions";
 
 export default {
-  title: 'Example/Score',
+  title: 'Score',
   component: Score,
   argTypes: {
     backgroundColor: { control: 'color' },
   },
 } as ComponentMeta<typeof Score>;
-
-const Template: ComponentStory<typeof Score> = (args) => <Score {...args} />;
 
 export const Primary: ComponentStory<typeof Score> = (args) => {
   const [score, dispatch] = useReducer(scoreReducer, initialState);

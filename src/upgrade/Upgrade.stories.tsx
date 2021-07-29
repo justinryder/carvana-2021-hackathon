@@ -1,10 +1,10 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { Upgrade } from '../upgrade/Upgrade';
+import { Upgrade } from './Upgrade';
 
 export default {
-  title: 'Example/Upgrade',
+  title: 'Upgrade',
   component: Upgrade,
   argTypes: {
     backgroundColor: { control: 'color' },
