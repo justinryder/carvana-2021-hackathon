@@ -1,15 +1,12 @@
-import { FunctionComponent } from 'react';
-import { Rect, Text } from 'react-konva';
-import { Upgrade as UpgradeType} from './types';
-import {CarmaTheme} from "../theme/CarmaTheme";
-import {Button} from "../inputs/Button";
-
-type ShapeProps = {
-  x: number;
-  y: number;
-  width?: number;
-  height?: number;
-}
+import { FunctionComponent } from "react";
+import { Rect, Text } from "react-konva";
+import { Upgrade as UpgradeType } from "./types";
+import { CarmaTheme } from "../theme/CarmaTheme";
+import { Button } from "../inputs/Button";
+import { ShapeProps } from "../types/shapes";
+import {padBox} from "../layout/padBox";
+import {layoutBox} from "../layout/layoutBox";
+import {Bounds} from "../layout/types";
 
 type UpgradeProps = {
   upgrade: UpgradeType;
@@ -19,40 +16,27 @@ type UpgradeProps = {
 } & ShapeProps;
 
 const titleHeight = CarmaTheme.font.size.large;
-const buttonHeight = 40;
+const buttonHeight = 45;
 
 type UpgradeInternalProps = {
   upgrade: UpgradeType;
   onPurchase: () => void;
   onRefund: () => void;
   padding: number;
-  top: number;
-  left: number;
-  right: number;
-  bottom: number;
-  width: number;
-  height: number;
+  bounds: Bounds;
 };
 
 const UpgradeName = ({
   upgrade,
   onPurchase,
   onRefund,
-  top,
-  left,
-  right,
-  bottom,
-  width,
-  height,
+  bounds,
   padding,
 }: UpgradeInternalProps) => {
   return (
     <Text
       text={upgrade.name.toUpperCase()}
-      width={width - (2 * padding)}
-      height={titleHeight}
-      x={left + padding}
-      y={top + padding}
+      {...bounds}
       fontFamily={CarmaTheme.font.family}
       fontSize={titleHeight}
       fontStyle="bold"
@@ -71,20 +55,13 @@ const UpgradeCost = ({
   upgrade,
   onPurchase,
   onRefund,
-  top,
-  left,
-  right,
-  bottom,
-  width,
-  height,
+  bounds,
   padding,
 }: UpgradeInternalProps) => {
   return (
     <Text
       text={currencyFormatter.format(upgrade.cost)}
-      width={width - (2 * padding)}
-      x={left + padding}
-      y={top + padding}
+      {...bounds}
       fontFamily={CarmaTheme.font.family}
       fontSize={CarmaTheme.font.size.normal}
       fontStyle="bold"
@@ -98,26 +75,13 @@ const UpgradeDescription = ({
   upgrade,
   onPurchase,
   onRefund,
-  top,
-  left,
-  right,
-  bottom,
-  width,
-  height,
+  bounds,
   padding,
 }: UpgradeInternalProps) => {
-  const yOffset = (2 * padding) + titleHeight;
-  const y = top + yOffset;
-  const bottomOffset = (2 * padding) + buttonHeight;
-
-
   return (
     <Text
       text={upgrade.description}
-      width={width - (2 * padding)}
-      height={height - yOffset - bottomOffset}
-      x={left + padding}
-      y={y}
+      {...bounds}
       fontFamily={CarmaTheme.font.family}
       fontSize={CarmaTheme.font.size.large}
       fontStyle="bold"
@@ -132,25 +96,13 @@ const UpgradeButton = ({
   upgrade,
   onPurchase,
   onRefund,
-  top,
-  left,
-  right,
-  bottom,
-  width,
-  height,
+  bounds,
   padding,
 }: UpgradeInternalProps) => {
-  const buttonWidth = width - (2 * padding);
-  const buttonX = left + padding;
-  const buttonY = bottom - padding - buttonHeight;
-
   return (
     <Button
       onClick={upgrade.isPurchased ? onRefund : onPurchase}
-      x={buttonX}
-      y={buttonY}
-      width={buttonWidth}
-      height={buttonHeight}
+      {...bounds}
       label={upgrade.isPurchased ? 'Refund' : 'Purchase'}
     />
   );
@@ -166,23 +118,51 @@ export const Upgrade: FunctionComponent<UpgradeProps> = ({
   height = 200,
   padding = 10,
 }) => {
-  const top = y;
-  const bottom = y + height;
-  const left = x;
-  const right = y + width;
-
   const internalProps = {
     upgrade: upgrade,
     onPurchase: onPurchase,
     onRefund: onRefund,
-    top: top,
-    left: left,
-    right: right,
-    bottom: bottom,
-    width: width,
-    height: height,
     padding: padding,
   };
+
+  const bounds = padBox({
+    x,
+    y,
+    width,
+    height,
+  }, padding);
+
+  const nameBounds = layoutBox({
+    bounds,
+    width: bounds.width / 2,
+    height: titleHeight,
+    align: 'top left',
+  });
+
+  const costBounds = layoutBox({
+    bounds,
+    width: bounds.width / 2,
+    height: titleHeight,
+    align: 'top right',
+  });
+
+  const buttonBounds = layoutBox({
+    bounds,
+    width,
+    height: buttonHeight,
+    align: 'bottom center',
+  });
+
+  const descriptionYOffset = nameBounds.y + nameBounds.height + padding;
+  const descriptionBottomOffset = (2 * padding) + buttonHeight;
+  const descriptionBounds = layoutBox({
+    bounds: {
+      ...bounds,
+      y: descriptionYOffset,
+    },
+    width,
+    height: height - descriptionYOffset - descriptionBottomOffset
+  });
 
   return (
     <>
@@ -194,10 +174,22 @@ export const Upgrade: FunctionComponent<UpgradeProps> = ({
         x={x}
         y={y}
       />
-      <UpgradeName {...internalProps} />
-      <UpgradeCost {...internalProps} />
-      <UpgradeDescription {...internalProps} />
-      <UpgradeButton {...internalProps} />
+      <UpgradeName
+        {...internalProps}
+        bounds={nameBounds}
+      />
+      <UpgradeCost
+        {...internalProps}
+        bounds={costBounds}
+      />
+      <UpgradeDescription
+        {...internalProps}
+        bounds={descriptionBounds}
+      />
+      <UpgradeButton
+        {...internalProps}
+        bounds={buttonBounds}
+      />
     </>
   )
 };

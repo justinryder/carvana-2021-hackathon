@@ -1,11 +1,12 @@
 export type Upgrade = {
+  id: string;
   cost: number;
   name: string;
   description?: string;
-  prerequisite?: Upgrade;
+  prerequisite?: string;
   isPurchased: boolean;
   apply: UpgradeFunction;
-}
+};
 
 // TODO: Figure this out as we go
 export type UpgradeFunction = (state: any) => any;

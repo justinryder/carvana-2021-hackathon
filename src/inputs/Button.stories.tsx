@@ -1,15 +1,11 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { ComponentStory } from '@storybook/react';
 
 import { Button } from './Button';
 
 export default {
-  title: 'Example/Button',
-  component: Button,
-  argTypes: {
-    backgroundColor: { control: 'color' },
-  },
-} as ComponentMeta<typeof Button>;
+  title: 'Button',
+};
 
 const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
 
@@ -20,5 +16,15 @@ Primary.args = {
   x: 50,
   y: 50,
   width: 120,
-  height: 40,
+  height: 45,
+};
+
+export const LongText = Template.bind({});
+LongText.args = {
+  label: 'Button Button ButtonButtonButton Button',
+  onClick: () => console.log('clicked button'),
+  x: 50,
+  y: 50,
+  width: 120,
+  height: 45,
 };
