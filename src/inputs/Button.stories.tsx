@@ -16,5 +16,15 @@ Primary.args = {
   x: 50,
   y: 50,
   width: 120,
-  height: 40,
+  height: 45,
+};
+
+export const LongText = Template.bind({});
+LongText.args = {
+  label: 'Button Button ButtonButtonButton Button',
+  onClick: () => console.log('clicked button'),
+  x: 50,
+  y: 50,
+  width: 120,
+  height: 45,
 };

@@ -43,8 +43,11 @@ const verticalAlign = (bounds: Bounds, align: AlignY, height: number): Bounds =>
   }
 };
 
-export const alignBox = (bounds: Bounds, align: Align, width: number, height: number): Bounds => {
+export const alignBox = (bounds: Bounds, align: Align, _width: number, _height: number): Bounds => {
   const [alignY = 'top', alignX = 'left'] = align.split(' ');
+
+  const width = Math.min(_width, bounds.width);
+  const height = Math.min(_height, bounds.height);
 
   return {
     ...horizontalAlign(

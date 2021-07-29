@@ -2,6 +2,7 @@ import {useState} from "react";
 import {KonvaNodeEvents, Rect, Text} from "react-konva";
 import Konva from "konva";
 import { CarmaTheme } from '../theme/CarmaTheme';
+import {layoutBox} from "../layout/layoutBox";
 
 type ShapeProps = {
   x: number;
@@ -26,7 +27,7 @@ export const Button = ({
   x,
   y,
   width = 120,
-  height = 40,
+  height = 45,
   onClick,
 }: ButtonProps) => {
   const [hovering, setHovering] = useState(false);
@@ -90,16 +91,25 @@ export const Button = ({
         listening={false}
       />
       <Text
+        {...layoutBox({
+          bounds: {
+            x,
+            y,
+            width,
+            height,
+          },
+          align: 'center center',
+          width,
+          height,
+          padding: 10,
+        })}
         text={label}
         fontFamily={CarmaTheme.font.family}
         fontStyle="bold"
-        width={finalWidth}
-        height={finalHeight}
-        x={x + halfDeltaWidth}
-        y={y + halfDeltaHeight}
         fill={textColor}
         verticalAlign="middle"
         align="center"
+        ellipsis
         listening={false}
       />
     </>
