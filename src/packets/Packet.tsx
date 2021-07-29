@@ -17,6 +17,8 @@ type PacketProps = {
   labelreg: string | undefined;
   labelbold: string | undefined;
   onClick: KonvaNodeEvents['onClick'];
+  onDrag: KonvaNodeEvents['onDragMove'];
+  onDragEnd: KonvaNodeEvents['onDragEnd'];
   backgroundColor?: string;
   textColor?: string;
 } & ShapeProps;
@@ -31,6 +33,8 @@ export const Packet = ({
   width,
   height,
   onClick,
+  onDrag,
+  onDragEnd,
   draggable
 }: PacketProps) => {
   const [clicking, setClicking] = useState(false);
@@ -61,16 +65,10 @@ export const Packet = ({
 
   const scalar = clicking ? 1.1 : 1;
 
-  const finalWidth = width * scalar;
-  const finalHeight = height * scalar;
-  const deltaWidth = width - finalWidth;
-  const deltaHeight = height - finalHeight;
-  const halfDeltaWidth = deltaWidth / 2;
-  const halfDeltaHeight = deltaHeight / 2;
+  const carWidth = 32;
 
   return (
-    <>
-      <Group
+    <Group
       width={width}
       height={height}
       x={x}
@@ -78,48 +76,52 @@ export const Packet = ({
       fill="transparent"
       draggable={true}
       onClick={onClick}
-       onMouseOver={handleMouseOver}
-       onMouseOut={handleMouseOut}
-      // onMouseDown={handleMouseDown}
-      // onMouseUp={handleMouseUp}
-      >
+      onMouseOver={handleMouseOver}
+      onMouseOut={handleMouseOut}
+      onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
+      scaleX={scalar}
+      scaleY={scalar}
+      offsetX={(width - width * scalar) / -2}
+      offsetY={(height - height * scalar) / -2}
+      onDragMove={onDrag}
+      onDragEnd={onDragEnd}
+    >
       <Rect
-        width={finalWidth}
-        height={finalHeight}
-        x={x + halfDeltaWidth}
-        y={y + halfDeltaHeight}
+        width={width}
+        height={height}
+        x={0}
+        y={0}
         fill={backgroundColor}
       />
       <TextPath
         text={labelreg}
         fontFamily={CarmaTheme.font.family}
-        width={finalWidth}
-        height={finalHeight}
-        x={x + halfDeltaWidth}
-        y={y + halfDeltaHeight}
+        width={width}
+        height={height}
+        x={10}
+        y={0}
         fill={textColor}
         verticalAlign="middle"
-        align="center"
+        align="left"
         listening={false}
-        data={`M ${x - (width/2)},${y + height + 5} L ${x - (width/2)},${y-40}`}
+        data={`M 0, ${height - 5} L 0, ${height - carWidth}`}
       />
       <TextPath
         text={labelbold}
         fontFamily={CarmaTheme.font.family}
         fontStyle="bold"
-        width={finalWidth}
-        height={finalHeight}
-        x={x + halfDeltaWidth}
-        y={y + halfDeltaHeight}
+        width={width}
+        height={height}
+        x={10}
+        y={0}
         fill={textColor}
         verticalAlign="middle"
-        align="center"
+        align="left"
         listening={false}
-        data={`M ${x - (width/2)},${y + height - 47} L ${x - (width/2)},${y-40}`}
+        data={`M 0, ${height - carWidth} L 0, ${height - 80}`}
       />
-      </Group>
-    </>
-    
+    </Group>
   )
 };
 

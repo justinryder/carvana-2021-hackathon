@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { Packet } from './Packet';
@@ -11,15 +11,33 @@ export default {
   },
 } as ComponentMeta<typeof Packet>;
 
-const Template: ComponentStory<typeof Packet> = (args) => <Packet {...args} />;
+const Template: ComponentStory<typeof Packet> = (args) => {
+  const [x, setX] = useState(50);
+  const [y, setY] = useState(50);
+
+  console.log('x', x, 'y', y);
+
+  return (
+    <Packet
+      {...args}
+      x={x}
+      y={y}
+      onDrag={event => {
+        setX(event.target.x());
+        setY(event.target.y());
+      }}
+      onDragEnd={() => {
+        alert(`Dragged to ${x}, ${y}`);
+      }}
+    />
+  );
+}
 
 export const Primary = Template.bind({});
 Primary.args = {
   labelreg: "CAR",
   labelbold:"VANA",
   onClick: () => console.log('Now drag?'),
-  x: 50,
-  y: 50,
   width: 85,
   height: 110,
   draggable: true,
