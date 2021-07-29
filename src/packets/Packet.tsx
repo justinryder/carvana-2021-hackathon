@@ -8,15 +8,15 @@ import { CarmaTheme } from '../theme/CarmaTheme';
 type ShapeProps = {
   x: number;
   y: number;
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
   draggable: boolean;
 }
 
 type PacketProps = {
-  labelreg: string | undefined;
-  labelbold: string | undefined;
-  onClick: KonvaNodeEvents['onClick'];
+  labelreg?: string | undefined;
+  labelbold?: string | undefined;
+  onClick?: KonvaNodeEvents['onClick'];
   onDrag: KonvaNodeEvents['onDragMove'];
   onDragEnd: KonvaNodeEvents['onDragEnd'];
   backgroundColor?: string;
@@ -24,14 +24,14 @@ type PacketProps = {
 } & ShapeProps;
 
 export const Packet = ({
-  labelreg,
-  labelbold,
-  backgroundColor,
-  textColor,
+  labelreg = 'CAR',
+  labelbold = 'VANA',
+  backgroundColor = CarmaTheme.color.callToAction,
+  textColor = CarmaTheme.font.color.white,
   x,
   y,
-  width,
-  height,
+  width = 85,
+  height = 100,
   onClick,
   onDrag,
   onDragEnd,

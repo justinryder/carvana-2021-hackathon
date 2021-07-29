@@ -4,15 +4,16 @@ import { RootState } from "../app/store";
 import { ShapeProps } from "../types/shapes";
 import { Upgrade } from "./Upgrade";
 import { purchase } from "./upgradeSlice";
+import {Group} from "react-konva";
 
 type UpgradeListProps = {} & ShapeProps;
 
-export const UpgradeList: FunctionComponent<UpgradeListProps> = () => {
+export const UpgradeList: FunctionComponent<UpgradeListProps> = ({ x, y }) => {
   const upgrades = useSelector((state: RootState) => state.upgrades.upgrades);
   const dispatch = useDispatch();
 
   return (
-    <>
+    <Group x={x} y={y}>
       {upgrades?.map((upgrade, index) => (
         <Upgrade
           key={upgrade.name}
@@ -24,6 +25,6 @@ export const UpgradeList: FunctionComponent<UpgradeListProps> = () => {
           onRefund={() => console.log("you refunded ", upgrade.name)}
         />
       ))}
-    </>
+    </Group>
   );
 };
