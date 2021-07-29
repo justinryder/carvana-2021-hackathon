@@ -1,7 +1,7 @@
 // visual for an individual reg packet
 
 import {useState} from "react";
-import {KonvaNodeEvents, Rect, Group, TextPath} from "react-konva";
+import {KonvaNodeEvents, Rect, Group, TextPath, Line} from "react-konva";
 import Konva from "konva";
 import { CarmaTheme } from '../theme/CarmaTheme';
 
@@ -120,6 +120,21 @@ export const Packet = ({
         align="left"
         listening={false}
         data={`M 0, ${height - carWidth} L 0, ${height - 80}`}
+      />
+      <Line
+        stroke={"black"}
+        strokeWidth={1}
+        points={[width - 20, 3, width - 2, 3]}
+      />
+      <Line
+        stroke={"black"}
+        strokeWidth={1}
+        points={[width - 13, 6, width - 2, 6]}
+      />
+      <Line
+        stroke={"black"}
+        strokeWidth={1}
+        points={[width - 10, 9, width - 2, 9]}
       />
     </Group>
   )
