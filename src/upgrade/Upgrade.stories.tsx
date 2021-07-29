@@ -8,7 +8,7 @@ import { Provider } from "react-redux";
 import { store } from "../app/store";
 
 export default {
-  title: "Example/Upgrade",
+  title: "Upgrade",
   component: Upgrade,
   argTypes: {
     backgroundColor: { control: "color" },
