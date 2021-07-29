@@ -26,8 +26,8 @@ type PacketProps = {
 export const Packet = ({
   labelreg,
   labelbold,
-  backgroundColor = CarmaTheme.color.callToAction,
-  textColor = CarmaTheme.font.color.white,
+  backgroundColor,
+  textColor,
   x,
   y,
   width,

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-
+import { CarmaTheme } from '../theme/CarmaTheme';
 import { Packet } from './Packet';
 
 export default {
@@ -37,6 +37,8 @@ export const Primary = Template.bind({});
 Primary.args = {
   labelreg: "CAR",
   labelbold:"VANA",
+  backgroundColor:CarmaTheme.color.callToAction, //white, warning, success, callToAction, or error
+  textColor:CarmaTheme.font.color.white, //Change to blue for white packets
   onClick: () => console.log('Now drag?'),
   width: 85,
   height: 110,
