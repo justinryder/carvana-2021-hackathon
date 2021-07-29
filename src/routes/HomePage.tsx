@@ -31,7 +31,7 @@ export const HomePage = () => {
 
   const subheadingBounds = moveBelow({
     bounds: headingBounds,
-    margin: 20,
+    margin: 60,
   });
 
   const subheading2Bounds = moveBelow({
@@ -67,8 +67,8 @@ export const HomePage = () => {
           stroke={CarmaTheme.color.border}
         />
         <Heading
-          text="TODO Make a Cool App Name"
-          fontSize={CarmaTheme.font.size.xxlarge}
+          text="Reg Packets, Please"
+          fontSize={42}
           {...headingBounds}
         />
         <Heading
