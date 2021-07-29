@@ -5,21 +5,15 @@ import { ShapeProps } from "../types/shapes";
 import { Upgrade } from "./Upgrade";
 import { purchase } from "./upgradeSlice";
 
-type UpgradeListProps = {
-  upgradeBucket?: "storeList" | "upgrades";
-} & ShapeProps;
+type UpgradeListProps = {} & ShapeProps;
 
-export const UpgradeList: FunctionComponent<UpgradeListProps> = ({
-  upgradeBucket = "storeList",
-}) => {
-  const upgrades = useSelector(
-    (state: RootState) => state.upgrades[upgradeBucket]
-  );
+export const UpgradeList: FunctionComponent<UpgradeListProps> = () => {
+  const upgrades = useSelector((state: RootState) => state.upgrades.upgrades);
   const dispatch = useDispatch();
 
   return (
     <>
-      {upgrades.map((upgrade, index) => (
+      {upgrades?.map((upgrade, index) => (
         <Upgrade
           key={upgrade.name}
           x={0}

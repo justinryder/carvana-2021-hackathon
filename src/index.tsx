@@ -3,10 +3,17 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { Provider } from "react-redux";
+import { store } from "./app/store";
+import { Stage } from "react-konva";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Stage width={window.innerWidth} height={window.innerHeight}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </Stage>
   </React.StrictMode>,
   document.getElementById("root")
 );

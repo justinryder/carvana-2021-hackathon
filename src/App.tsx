@@ -1,29 +1,40 @@
-import React from "react";
-import { Provider } from "react-redux";
 import "./App.css";
-import { store } from "./app/store";
-import { Stage, Layer, Text } from "react-konva";
+import { Layer, Text } from "react-konva";
 import { UpgradeList } from "./upgrade/UpgradeList";
+import { Button } from "./inputs/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { completePacket } from "./upgrade/upgradeSlice";
+import { RootState } from "./app/store";
+import { Score } from "./score/Score";
 
 function App() {
+  const { money, packetsComplete } = useSelector(
+    (state: RootState) => state.upgrades
+  );
+  const dispatch = useDispatch();
+
   return (
-    // Stage - is a div wrapper
-    // Layer - is an actual 2d canvas element, so you can have several layers inside the stage
-    // Rect and Circle are not DOM elements. They are 2d shapes on canvas
-    <Provider store={store}>
-      <Stage width={window.innerWidth} height={window.innerHeight}>
-        <Layer>
-          <Text text="Store List" />
-          <UpgradeList x={100} y={100} />
-          <Text text="Upgrade List" />
-          {/* <UpgradeList x={200} y={200} upgradeBucket="upgrades" /> */}
-        </Layer>
-        {/* <Layer>
-        <Rect x={100} width={50} height={50} fill="red" onClick={() => alert('clicked rect 2')} />
-        <Circle x={400} y={200} stroke="black" radius={50} onClick={() => alert('clicked circle 2')} />
-      </Layer> */}
-      </Stage>
-    </Provider>
+    <Layer>
+      <Text text="Store List" />
+      <UpgradeList x={100} y={100} />
+
+      <Button
+        label="complete packet"
+        x={600}
+        y={600}
+        onClick={() => dispatch(completePacket())}
+      />
+
+      <Score
+        x={300}
+        y={320}
+        score={{
+          money,
+          packetsCompleted: packetsComplete,
+          incomePerPacket: 10,
+        }}
+      />
+    </Layer>
   );
 }
 

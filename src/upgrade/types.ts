@@ -8,6 +8,11 @@ export type Upgrade = {
   apply: UpgradeFunction;
 };
 
+export type StoreList = {
+  id: string;
+  isPurchased: boolean;
+};
+
 // TODO: Figure this out as we go
 export type UpgradeFunction = (state: any) => any;
 
