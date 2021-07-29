@@ -5,12 +5,13 @@ import { Upgrade } from "./upgrade/Upgrade";
 import { Upgrade as UpgradeType } from "./upgrade/types";
 
 const upgrade: UpgradeType = {
+  id: "open_envelope",
   name: "Open Envelope",
   description:
     "An advanced robot that we sourced from the future, capable or opening envelopes at lightning speed.",
   cost: 3.5,
   isPurchased: false,
-  apply: () => { },
+  apply: () => {},
 };
 
 function App() {

@@ -4,6 +4,8 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Upgrade } from "./Upgrade";
 import { UpgradeList } from "./UpgradeList";
 import { upgrades } from "./upgrades";
+import { Provider } from "react-redux";
+import { store } from "../app/store";
 
 export default {
   title: "Example/Upgrade",
@@ -37,4 +39,11 @@ Primary.args = {
 };
 
 // @ts-ignore
-export const UpgradeListComponent = () => <UpgradeList upgrades={upgrades} />;
+export const UpgradeListComponent = () => (
+  <Provider store={store}>
+    Store
+    <UpgradeList x={0} y={0} />
+    Upgrades
+    <UpgradeList x={150} y={0} upgradeBucket="upgrades" />
+  </Provider>
+);

@@ -1,15 +1,22 @@
 import { FunctionComponent } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../app/store";
 import { ShapeProps } from "../types/shapes";
-import { Upgrade as UpgradeType } from "./types";
 import { Upgrade } from "./Upgrade";
+import { purchase } from "./upgradeSlice";
 
 type UpgradeListProps = {
-  upgrades: UpgradeType[];
+  upgradeBucket?: "storeList" | "upgrades";
 } & ShapeProps;
 
 export const UpgradeList: FunctionComponent<UpgradeListProps> = ({
-  upgrades,
+  upgradeBucket = "storeList",
 }) => {
+  const upgrades = useSelector(
+    (state: RootState) => state.upgrades[upgradeBucket]
+  );
+  const dispatch = useDispatch();
+
   return (
     <>
       {upgrades.map((upgrade, index) => (
@@ -19,7 +26,7 @@ export const UpgradeList: FunctionComponent<UpgradeListProps> = ({
           y={index * 160}
           height={150}
           upgrade={upgrade}
-          onPurchase={() => console.log("you bought ", upgrade.name)}
+          onPurchase={() => dispatch(purchase(upgrade))}
           onRefund={() => console.log("you refunded ", upgrade.name)}
         />
       ))}
