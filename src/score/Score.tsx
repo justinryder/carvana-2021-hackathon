@@ -1,8 +1,10 @@
 // display for the current score
 
 import {CarmaTheme} from "../theme/CarmaTheme";
-import {Rect, Text} from "react-konva";
+import {Group, Rect, Text} from "react-konva";
 import { Score as ScoreType } from './types';
+import {padBox} from "../layout/padBox";
+import {layoutBox} from "../layout/layoutBox";
 
 type ShapeProps = {
   x: number;
@@ -18,6 +20,11 @@ type ScoreProps = {
 
 const textHeight = 20;
 
+const currencyFormatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+});
+
 export const Score = ({
   x,
   y,
@@ -26,30 +33,73 @@ export const Score = ({
   padding = 5,
   score,
 }: ScoreProps) => {
-  console.log('Score', score);
+  const bounds = padBox({
+    x: 0,
+    y: 0,
+    width,
+    height,
+  }, padding);
 
-  const halfWidth = width / 2;
+  const packetsCompletedBounds = layoutBox({
+    bounds,
+    width: bounds.width,
+    height: textHeight,
+  });
+
+  const moneyBounds = layoutBox({
+    bounds: {
+      ...bounds,
+      y: packetsCompletedBounds.y + packetsCompletedBounds.height + padding,
+    },
+    width: bounds.width,
+    height: textHeight,
+  });
+
+  const incomePerPacketBounds = layoutBox({
+    bounds: {
+      ...bounds,
+      y: moneyBounds.y + moneyBounds.height + padding,
+    },
+    width: bounds.width,
+    height: textHeight,
+  });
 
   return (
-    <>
+    <Group
+      x={x}
+      y={y}
+      width={width}
+      height={height}
+    >
       <Rect
         width={width}
         height={height}
         fill={CarmaTheme.color.background}
         stroke={CarmaTheme.color.border}
-        x={x}
-        y={y}
+        x={0}
+        y={0}
       />
       <Text
-        text={score.packetsCompleted.toString()}
+        text={`Packets Completed: ${score.packetsCompleted.toString()}`}
         fill={CarmaTheme.font.color.darkest}
         fontFamily={CarmaTheme.font.family}
         fontSize={CarmaTheme.font.size.large}
-        x={x + padding}
-        y={y + padding}
-        width={halfWidth - (2 * padding)}
-        height={textHeight}
+        {...packetsCompletedBounds}
       />
-    </>
+      <Text
+        text={`Money: ${currencyFormatter.format(score.money)}`}
+        fill={CarmaTheme.font.color.darkest}
+        fontFamily={CarmaTheme.font.family}
+        fontSize={CarmaTheme.font.size.large}
+        {...moneyBounds}
+      />
+      <Text
+        text={`Income per Packet: ${currencyFormatter.format(score.incomePerPacket)}`}
+        fill={CarmaTheme.font.color.darkest}
+        fontFamily={CarmaTheme.font.family}
+        fontSize={CarmaTheme.font.size.large}
+        {...incomePerPacketBounds}
+      />
+    </Group>
   )
 };

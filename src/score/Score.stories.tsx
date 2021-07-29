@@ -21,26 +21,31 @@ export const Primary: ComponentStory<typeof Score> = (args) => {
     <>
       <Score
         {...args}
-        score={score}
+        score={{
+          money: 1234.42,
+          packetsCompleted: 82652346,
+          incomePerPacket: 3.14,
+        }}
       />
-      {[1, 5, 10, 25, 50, 100].map((cost, index) =>
-        <Button
-          key={cost}
-          onClick={() => dispatch(ScoreActions.upgradePurchased(cost))}
-          x={5 + 125 * index}
-          y={200}
-          label={`Purchase Upgrade ($${cost})`}
-        />
-      )}
-      <Button
-        onClick={() => dispatch(ScoreActions.packetCompleted())}
-        x={5}
-        y={250}
-        label="Complete Packet"
-      />
+      {/*{[1, 5, 10, 25, 50, 100].map((cost, index) =>*/}
+      {/*  <Button*/}
+      {/*    key={cost}*/}
+      {/*    onClick={() => dispatch(ScoreActions.upgradePurchased(cost))}*/}
+      {/*    x={5 + 125 * index}*/}
+      {/*    y={200}*/}
+      {/*    label={`Purchase Upgrade ($${cost})`}*/}
+      {/*  />*/}
+      {/*)}*/}
+      {/*<Button*/}
+      {/*  onClick={() => dispatch(ScoreActions.packetCompleted())}*/}
+      {/*  x={5}*/}
+      {/*  y={250}*/}
+      {/*  label="Complete Packet"*/}
+      {/*/>*/}
     </>
   );
 }
+Primary.storyName = 'Score';
 Primary.args = {
   x: 5,
   y: 5,
