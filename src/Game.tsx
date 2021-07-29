@@ -13,6 +13,7 @@ import {CarmaTheme} from "./theme/CarmaTheme";
 import {boxIntersection} from "./collision/boxIntersections";
 import {bounds, move} from "./bounds";
 import {useWindowBounds} from "./useWindowSize";
+import {Bucket} from "./bucket/Bucket";
 
 const padding = 5;
 
@@ -53,11 +54,17 @@ export const Game = () => {
         <UpgradeList x={0} y={105} />
       </Group>
 
-      <Rect
+      <Bucket
         {...target}
-        fill={isPacketInTarget ? CarmaTheme.color.success : CarmaTheme.color.background}
-        stroke={CarmaTheme.color.border}
+        label={"Trades"}
+        fill={isPacketInTarget ? CarmaTheme.color.callToAction : CarmaTheme.color.team.insideAdvocate}
       />
+
+      {/*<Rect*/}
+      {/*  {...target}*/}
+      {/*  fill={isPacketInTarget ? CarmaTheme.color.success : CarmaTheme.color.background}*/}
+      {/*  stroke={CarmaTheme.color.border}*/}
+      {/*/>*/}
 
       <Packet
         draggable={true}

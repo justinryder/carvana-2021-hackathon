@@ -27,3 +27,13 @@ export const layoutBox = ({
     height,
   );
 };
+
+export const moveBelow = ({
+  bounds,
+  margin,
+}) => {
+  return {
+    ...bounds,
+    y: bounds.y + bounds.height + margin,
+  };
+};

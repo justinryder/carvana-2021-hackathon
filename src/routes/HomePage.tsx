@@ -1,6 +1,6 @@
 import {Group, Layer, Rect, Text} from 'react-konva';
 import {useWindowBounds} from "../useWindowSize";
-import {layoutBox} from "../layout/layoutBox";
+import {layoutBox, moveBelow} from "../layout/layoutBox";
 import {Heading} from "./Heading";
 import {useLinks} from "./useLinks";
 import {Button} from "../inputs/Button";
@@ -22,34 +22,22 @@ export const HomePage = () => {
     bounds: {
       ...bounds,
       x: 0,
-      y: 0,
-    },
-    width: 400,
-    height: 100,
-    align: 'top center',
-  });
-
-  const subheadingBounds = layoutBox({
-    bounds: {
-      ...bounds,
-      x: 0,
       y: 50,
     },
     width: 400,
-    height: 100,
+    height: 20,
     align: 'top center',
   });
 
-  const subheading2Bounds = layoutBox({
-    bounds: {
-      ...bounds,
-      x: 0,
-      y: 80,
-    },
-    width: 400,
-    height: 100,
-    align: 'top center',
+  const subheadingBounds = moveBelow({
+    bounds: headingBounds,
+    margin: 20,
   });
+
+  const subheading2Bounds = moveBelow({
+    bounds: subheadingBounds,
+    margin: 5,
+  })
 
   const playButtonBounds = layoutBox({
     bounds: {
@@ -62,15 +50,9 @@ export const HomePage = () => {
     align: 'top center',
   });
 
-  const creditsButtonBounds = layoutBox({
-    bounds: {
-      ...bounds,
-      x: 0,
-      y: 300,
-    },
-    width: 200,
-    height: 50,
-    align: 'top center',
+  const creditsButtonBounds = moveBelow({
+    bounds: playButtonBounds,
+    margin: 20,
   });
 
   return (
