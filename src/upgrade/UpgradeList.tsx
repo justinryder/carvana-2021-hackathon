@@ -22,7 +22,6 @@ export const UpgradeList: FunctionComponent<UpgradeListProps> = ({ x, y }) => {
           height={150}
           upgrade={upgrade}
           onPurchase={() => dispatch(purchase(upgrade))}
-          onRefund={() => console.log("you refunded ", upgrade.name)}
         />
       ))}
     </Group>

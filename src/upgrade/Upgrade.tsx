@@ -7,11 +7,12 @@ import { ShapeProps } from "../types/shapes";
 import {padBox} from "../layout/padBox";
 import {layoutBox} from "../layout/layoutBox";
 import {Bounds} from "../layout/types";
+import {useSelector} from "react-redux";
+import {RootState} from "../app/store";
 
 type UpgradeProps = {
   upgrade: UpgradeType;
   onPurchase: () => void;
-  onRefund: () => void;
   padding?: number;
 } & ShapeProps;
 
@@ -21,7 +22,6 @@ const buttonHeight = 45;
 type UpgradeInternalProps = {
   upgrade: UpgradeType;
   onPurchase: () => void;
-  onRefund: () => void;
   padding: number;
   bounds: Bounds;
 };
@@ -29,7 +29,6 @@ type UpgradeInternalProps = {
 const UpgradeName = ({
   upgrade,
   onPurchase,
-  onRefund,
   bounds,
   padding,
 }: UpgradeInternalProps) => {
@@ -54,7 +53,6 @@ const currencyFormatter = new Intl.NumberFormat('en-US', {
 const UpgradeCost = ({
   upgrade,
   onPurchase,
-  onRefund,
   bounds,
   padding,
 }: UpgradeInternalProps) => {
@@ -74,7 +72,6 @@ const UpgradeCost = ({
 const UpgradeDescription = ({
   upgrade,
   onPurchase,
-  onRefund,
   bounds,
   padding,
 }: UpgradeInternalProps) => {
@@ -95,15 +92,18 @@ const UpgradeDescription = ({
 const UpgradeButton = ({
   upgrade,
   onPurchase,
-  onRefund,
   bounds,
   padding,
 }: UpgradeInternalProps) => {
+  const money = useSelector((state: RootState) => state.upgrades.money);
+  const canAfford = money >= upgrade.cost;
+
   return (
     <Button
-      onClick={upgrade.isPurchased ? onRefund : onPurchase}
+      disabled={!canAfford}
+      onClick={onPurchase}
       {...bounds}
-      label={upgrade.isPurchased ? 'Refund' : 'Purchase'}
+      label="Purchase"
     />
   );
 };
@@ -111,7 +111,6 @@ const UpgradeButton = ({
 export const Upgrade: FunctionComponent<UpgradeProps> = ({
   upgrade,
   onPurchase,
-  onRefund,
   x,
   y,
   width = 300,
@@ -121,7 +120,6 @@ export const Upgrade: FunctionComponent<UpgradeProps> = ({
   const internalProps = {
     upgrade: upgrade,
     onPurchase: onPurchase,
-    onRefund: onRefund,
     padding: padding,
   };
 
@@ -198,9 +196,3 @@ export const Upgrade: FunctionComponent<UpgradeProps> = ({
     </Group>
   )
 };
-
-/**
- * purchase/refund
- * cost
- * name
- */

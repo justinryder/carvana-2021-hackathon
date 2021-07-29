@@ -12,18 +12,24 @@ type ShapeProps = {
 }
 
 type ButtonProps = {
+  disabled?: boolean;
   label: string | undefined;
   onClick: KonvaNodeEvents['onClick'];
   backgroundColor?: string;
   backgroundColorHover?: string;
+  backgroundColorDisabled?: string;
   textColor?: string;
+  fontSize?: number;
 } & ShapeProps;
 
 export const Button = ({
+  disabled,
   label,
   backgroundColor = CarmaTheme.color.callToAction,
   backgroundColorHover = CarmaTheme.color.callToActionInteractive,
+  backgroundColorDisabled = CarmaTheme.color.shadow,
   textColor = CarmaTheme.font.color.white,
+  fontSize = CarmaTheme.font.size.normal,
   x,
   y,
   width = 120,
@@ -34,6 +40,10 @@ export const Button = ({
   const [clicking, setClicking] = useState(false);
 
   const handleMouseOver = (event: Konva.KonvaEventObject<MouseEvent>) => {
+    if (disabled) {
+      return;
+    }
+
     setHovering(true);
 
     const container = event.target.getStage()?.container();
@@ -52,6 +62,10 @@ export const Button = ({
   };
 
   const handleMouseDown = (event: Konva.KonvaEventObject<MouseEvent>) => {
+    if (disabled) {
+      return;
+    }
+
     setClicking(true);
   };
 
@@ -68,6 +82,14 @@ export const Button = ({
   const halfDeltaWidth = deltaWidth / 2;
   const halfDeltaHeight = deltaHeight / 2;
 
+  let bgColor = backgroundColor;
+  if (hovering) {
+    bgColor = backgroundColorHover;
+  }
+  if (disabled) {
+    bgColor = backgroundColorDisabled;
+  }
+
   return (
     <>
       <Rect
@@ -76,7 +98,7 @@ export const Button = ({
         x={x}
         y={y}
         fill="transparent"
-        onClick={onClick}
+        onClick={disabled ? null : onClick}
         onMouseOver={handleMouseOver}
         onMouseOut={handleMouseOut}
         onMouseDown={handleMouseDown}
@@ -87,7 +109,7 @@ export const Button = ({
         height={finalHeight}
         x={x + halfDeltaWidth}
         y={y + halfDeltaHeight}
-        fill={hovering ? backgroundColorHover : backgroundColor}
+        fill={bgColor}
         listening={false}
       />
       <Text
@@ -106,6 +128,7 @@ export const Button = ({
         text={label}
         fontFamily={CarmaTheme.font.family}
         fontStyle="bold"
+        fontSize={fontSize}
         fill={textColor}
         verticalAlign="middle"
         align="center"
