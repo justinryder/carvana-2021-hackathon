@@ -1,5 +1,6 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Text } from "react-konva";
 
 import { Upgrade } from "./Upgrade";
 import { UpgradeList } from "./UpgradeList";
@@ -39,10 +40,9 @@ Primary.args = {
 
 // @ts-ignore
 export const UpgradeListComponent = () => (
-  <Provider store={store}>
-    Store
-    <UpgradeList x={0} y={0} />
-    Upgrades
-    <UpgradeList x={150} y={0} upgradeBucket="upgrades" />
-  </Provider>
+  <>
+    <Provider store={store}>
+      <UpgradeList x={0} y={0} />
+    </Provider>
+  </>
 );
