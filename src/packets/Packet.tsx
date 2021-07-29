@@ -1,15 +1,16 @@
 // visual for an individual reg packet
 
 import {useState} from "react";
-import {KonvaNodeEvents, Rect, Text, TextPath} from "react-konva";
+import {KonvaNodeEvents, Rect, Group, TextPath} from "react-konva";
 import Konva from "konva";
 import { CarmaTheme } from '../theme/CarmaTheme';
 
 type ShapeProps = {
   x: number;
   y: number;
-  width?: number;
-  height?: number;
+  width: number;
+  height: number;
+  draggable: boolean;
 }
 
 type PacketProps = {
@@ -27,9 +28,10 @@ export const Packet = ({
   textColor = CarmaTheme.font.color.white,
   x,
   y,
-  width = 120,
-  height = 40,
+  width,
+  height,
   onClick,
+  draggable
 }: PacketProps) => {
   const [clicking, setClicking] = useState(false);
 
@@ -68,30 +70,29 @@ export const Packet = ({
 
   return (
     <>
-      <Rect
-        width={width}
-        height={height}
-        x={x}
-        y={y}
-        fill="transparent"
-        onClick={onClick}
-        onMouseOver={handleMouseOver}
-        onMouseOut={handleMouseOut}
-        onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
-      />
+      <Group
+      width={width}
+      height={height}
+      x={x}
+      y={y}
+      fill="transparent"
+      draggable={true}
+      onClick={onClick}
+       onMouseOver={handleMouseOver}
+       onMouseOut={handleMouseOut}
+      // onMouseDown={handleMouseDown}
+      // onMouseUp={handleMouseUp}
+      >
       <Rect
         width={finalWidth}
         height={finalHeight}
         x={x + halfDeltaWidth}
         y={y + halfDeltaHeight}
         fill={backgroundColor}
-        listening={false}
       />
       <TextPath
         text={labelreg}
         fontFamily={CarmaTheme.font.family}
-        // fontStyle="bold"
         width={finalWidth}
         height={finalHeight}
         x={x + halfDeltaWidth}
@@ -116,7 +117,9 @@ export const Packet = ({
         listening={false}
         data={`M ${x - (width/2)},${y + height - 47} L ${x - (width/2)},${y-40}`}
       />
+      </Group>
     </>
+    
   )
 };
 

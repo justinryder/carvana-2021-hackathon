@@ -22,4 +22,5 @@ Primary.args = {
   y: 50,
   width: 85,
   height: 110,
+  draggable: true,
 };
