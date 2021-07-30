@@ -118,7 +118,7 @@ export const Packet = ({
         text={getPacketTypeLabel(packetType)}
         x={10}
         y={10}
-        fill={CarmaTheme.color.white}
+        fill={packetType === ("trade") ? CarmaTheme.color.black : CarmaTheme.color.white}
         fontFamily={CarmaTheme.font.family}
         fontStyle="bold"
         fontSize={28}

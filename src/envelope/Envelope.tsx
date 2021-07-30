@@ -55,6 +55,15 @@ export const Envelope: FunctionComponent<EnvelopeProps> = ({
         fill="#F1D592"
         stroke={CarmaTheme.color.background}
       />
+      {/* <Rect
+        width={width}
+        height={height}
+        x={0}
+        y={0}
+        // fill={CarmaTheme.color.white}
+        fill="#F1D592"
+        stroke={CarmaTheme.color.background}
+      /> */}
       <TextPath
         text={labelreg}
         fontFamily={CarmaTheme.font.family}
