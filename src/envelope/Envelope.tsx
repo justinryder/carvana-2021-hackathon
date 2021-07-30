@@ -4,13 +4,16 @@ import { FunctionComponent, useState } from "react";
 import { CarmaTheme } from "../theme/CarmaTheme";
 import { Packet } from "../packets/Packet";
 
-type EnvelopeProps = {} & ShapeProps;
+type EnvelopeProps = {
+  packetBackgroundColor: string;
+} & ShapeProps;
 
 export const Envelope: FunctionComponent<EnvelopeProps> = ({
   x,
   y,
   height = 100,
   width = 85,
+  packetBackgroundColor,
 }) => {
   const labelreg = "CAR";
   const labelbold = "VANA";
@@ -20,7 +23,14 @@ export const Envelope: FunctionComponent<EnvelopeProps> = ({
   return (
     <>
       {isEnvelopeOpen && (
-        <Packet x={x} y={y} draggable onDrag={() => {}} onDragEnd={() => {}} />
+        <Packet
+          x={x}
+          y={y}
+          backgroundColor={packetBackgroundColor}
+          draggable
+          onDrag={() => {}}
+          onDragEnd={() => {}}
+        />
       )}
       {!isEnvelopeOpen && (
         <Group
