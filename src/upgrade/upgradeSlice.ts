@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Upgrade } from "./types";
 import { Packet, Envelope } from "../envelope/types";
 import { upgrades } from "./upgrades";
-import { createWorkForDay } from "../envelope/utils";
+import {createWorkForDay, getNewPacketBounds} from "../envelope/utils";
 import { layoutBox, moveRight } from "../layout/layoutBox";
 import { BUCKET_HEIGHT, BUCKET_WIDTH, PACKET_WIDTH } from "../constants";
 import { getBucketLabel, getPacketColor } from "../packets/PacketTypeLabelMap";
@@ -83,8 +83,10 @@ export const upgradeSlice = createSlice({
         ),
         packets: [
           ...state.packets,
-          state.envelopes.find((envelope) => envelope.id === action.payload.id)
-            .packet,
+          {
+            ...state.envelopes.find((envelope) => envelope.id === action.payload.id).packet,
+            bounds: getNewPacketBounds(),
+          }
         ],
       };
     },
@@ -116,9 +118,18 @@ export const upgradeSlice = createSlice({
         return;
       }
 
+      const defaultPacketBounds = getNewPacketBounds();
       return {
         ...state,
         windowBounds: action.payload,
+        packets: state.packets.map((packet) =>
+          packet.bounds.y === defaultPacketBounds.y || !boxIntersection(packet.bounds, action.payload)
+            ? {
+                ...packet,
+                bounds: {...defaultPacketBounds},
+              }
+            : packet
+        ),
       };
     },
   },

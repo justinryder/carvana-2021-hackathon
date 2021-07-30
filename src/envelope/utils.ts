@@ -13,9 +13,10 @@ const randomItem = (items) => items[Math.floor(Math.random() * items.length)];
 const packetTypes = Object.values(PacketType);
 const getNewPacketType = () => randomItem(packetTypes);
 
+const padding = 15; // matches Game.tsx's padding constant
 export const getNewPacketBounds = () => ({
-  x: 650 + BUCKET_PACKET_DELTA_WIDTH / 2,
-  y: BUCKET_HEIGHT - PACKET_HEIGHT - 10,
+  x: window.innerWidth / 2 + padding / 2 + BUCKET_PACKET_DELTA_WIDTH / 2,
+  y: padding + BUCKET_HEIGHT - PACKET_HEIGHT - 10,
   width: PACKET_WIDTH,
   height: PACKET_HEIGHT,
 });

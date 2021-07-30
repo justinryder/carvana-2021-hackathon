@@ -34,7 +34,7 @@ import { debounce } from "lodash";
 import { Bin } from "./bin/Bin";
 import { getNewPacketBounds } from "./envelope/utils";
 
-const padding = 5;
+const padding = 15;
 
 const randomItem = (items) => items[Math.floor(Math.random() * items.length)];
 
@@ -47,6 +47,8 @@ export const Game = () => {
     (state: RootState) => state.upgrades
   );
   const dispatch = useDispatch();
+
+  const windowBounds = useWindowBounds();
 
   const handlePacketDrag = useCallback(
     debounce((event, packet) => {
@@ -71,24 +73,35 @@ export const Game = () => {
   };
 
   return (
-    <Group x={padding} y={padding}>
-      <Group x={0} y={0}>
-        <Score
-          x={0}
-          y={0}
-          score={{
-            money,
-            packetsCompleted: packetsComplete,
-            incomePerPacket: 10,
-          }}
-        />
-        <UpgradeList x={0} y={105} />
-      </Group>
+    <Group x={0} y={0}>
+
+      <Score
+        {...layoutBox({
+          bounds: windowBounds,
+          width: 300,
+          height: 100,
+          align: 'top left',
+          padding,
+        })}
+        score={{
+          money,
+          packetsCompleted: packetsComplete,
+          incomePerPacket: 10,
+        }}
+      />
+
+      <UpgradeList {...layoutBox({
+        bounds: windowBounds,
+        width: 300,
+        height: 900,
+        align: 'top right',
+        padding,
+      })} />
 
       <Bin
         title={`Inbound Envelopes (${envelopeCount})`}
-        x={350}
-        y={0}
+        x={windowBounds.width / 2 - BUCKET_WIDTH - padding / 2}
+        y={padding}
         width={BUCKET_WIDTH}
         height={BUCKET_HEIGHT}
         hasEnvelope={Boolean(nextEnvelope)}
@@ -107,8 +120,8 @@ export const Game = () => {
 
       <Bin
         title={`Opened Packets (${packets.length})`}
-        x={650}
-        y={0}
+        x={windowBounds.width / 2 + padding / 2}
+        y={padding}
         width={BUCKET_WIDTH}
         height={BUCKET_HEIGHT}
         hasEnvelope={false}
