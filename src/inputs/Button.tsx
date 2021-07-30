@@ -1,20 +1,20 @@
-import {useState} from "react";
-import {KonvaNodeEvents, Rect, Text} from "react-konva";
+import { useState } from "react";
+import { KonvaNodeEvents, Rect, Text } from "react-konva";
 import Konva from "konva";
-import { CarmaTheme } from '../theme/CarmaTheme';
-import {layoutBox} from "../layout/layoutBox";
+import { CarmaTheme } from "../theme/CarmaTheme";
+import { layoutBox } from "../layout/layoutBox";
 
 type ShapeProps = {
   x: number;
   y: number;
   width?: number;
   height?: number;
-}
+};
 
 type ButtonProps = {
   disabled?: boolean;
   label: string | undefined;
-  onClick: KonvaNodeEvents['onClick'];
+  onClick: KonvaNodeEvents["onClick"];
   backgroundColor?: string;
   backgroundColorHover?: string;
   backgroundColorDisabled?: string;
@@ -48,7 +48,7 @@ export const Button = ({
 
     const container = event.target.getStage()?.container();
     if (container) {
-      container.style.cursor = 'pointer';
+      container.style.cursor = "pointer";
     }
   };
 
@@ -57,7 +57,7 @@ export const Button = ({
 
     const container = event.target.getStage()?.container();
     if (container) {
-      container.style.cursor = 'default';
+      container.style.cursor = "default";
     }
   };
 
@@ -120,7 +120,7 @@ export const Button = ({
             width,
             height,
           },
-          align: 'center center',
+          align: "center center",
           width,
           height,
           padding: 10,
@@ -136,6 +136,5 @@ export const Button = ({
         listening={false}
       />
     </>
-  )
+  );
 };
-

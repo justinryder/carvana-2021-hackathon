@@ -4,13 +4,12 @@ import { FunctionComponent, useState } from "react";
 import { CarmaTheme } from "../theme/CarmaTheme";
 import { Packet } from "../packets/Packet";
 import { PacketType } from "../packets/types";
-import {useDispatch} from "react-redux";
-import {openEnvelope} from "../upgrade/upgradeSlice";
-import {Envelope as EnvelopeType} from "./types";
-import {PACKET_HEIGHT, PACKET_WIDTH} from "../constants";
+import { useDispatch } from "react-redux";
+import { openEnvelope } from "../upgrade/upgradeSlice";
+import { Envelope as EnvelopeType } from "./types";
+import { PACKET_HEIGHT, PACKET_WIDTH } from "../constants";
 
-type EnvelopeProps = {
-} & ShapeProps;
+type EnvelopeProps = {} & ShapeProps;
 
 // TODO: make this look more like an envelope and less like a packet
 
@@ -23,7 +22,6 @@ export const Envelope: FunctionComponent<EnvelopeProps> = ({
   const labelreg = "CAR";
   const labelbold = "VANA";
   const carWidth = 32;
-
 
   return (
     <Group

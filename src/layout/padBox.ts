@@ -1,4 +1,4 @@
-import {Bounds} from "./types";
+import { Bounds } from "./types";
 
 export const padBox = (bounds: Bounds, padding: number): Bounds => {
   const doublePadding = padding * 2;

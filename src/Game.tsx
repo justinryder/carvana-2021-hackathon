@@ -3,13 +3,14 @@ import { UpgradeList } from "./upgrade/UpgradeList";
 import {
   completePacket,
   getBuckets,
-  getEnvelopeCount, getNextEnvelope,
+  getEnvelopeCount,
+  getNextEnvelope,
   getPackets,
   openEnvelope,
-  updatePacket
+  updatePacket,
 } from "./upgrade/upgradeSlice";
 import { Score } from "./score/Score";
-import React, {useCallback, useEffect, useState} from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./app/store";
 import { Packet } from "./packets/Packet";
@@ -28,10 +29,10 @@ import {
   PACKET_WIDTH,
 } from "./constants";
 import { EnvelopeStack } from "./envelope/EnvelopeStack";
-import {Envelope} from "./envelope/Envelope";
-import { debounce } from 'lodash';
-import {Bin} from "./bin/Bin";
-import {getNewPacketBounds} from "./envelope/utils";
+import { Envelope } from "./envelope/Envelope";
+import { debounce } from "lodash";
+import { Bin } from "./bin/Bin";
+import { getNewPacketBounds } from "./envelope/utils";
 
 const padding = 5;
 
@@ -47,13 +48,18 @@ export const Game = () => {
   );
   const dispatch = useDispatch();
 
-  const handlePacketDrag = useCallback(debounce((event, packet) => {
-    dispatch(updatePacket({
-      ...packet,
-      bounds: move(packet.bounds, event.target.x(), event.target.y()),
-      isDragging: true,
-    }));
-  }, 10), [dispatch]);
+  const handlePacketDrag = useCallback(
+    debounce((event, packet) => {
+      dispatch(
+        updatePacket({
+          ...packet,
+          bounds: move(packet.bounds, event.target.x(), event.target.y()),
+          isDragging: true,
+        })
+      );
+    }, 10),
+    [dispatch]
+  );
 
   const envelopeCount = useSelector(getEnvelopeCount);
   const nextEnvelope = useSelector(getNextEnvelope);
@@ -116,22 +122,28 @@ export const Game = () => {
           y={packet.bounds.y}
           onDrag={(event) => handlePacketDrag(event, packet)}
           onDragEnd={() => {
-            const bucketCollision = buckets.find((bucket: any) => bucket.packet?.id === packet.id) as any;
+            const bucketCollision = buckets.find(
+              (bucket: any) => bucket.packet?.id === packet.id
+            ) as any;
             if (bucketCollision?.packetMatch) {
               dispatch(completePacket(packet.id));
             } else if (!packet.isInWindow || bucketCollision?.packetError) {
-              dispatch(updatePacket({
-                ...packet,
-                isDragging: false,
-                bounds: getNewPacketBounds(),
-              }));
+              dispatch(
+                updatePacket({
+                  ...packet,
+                  isDragging: false,
+                  bounds: getNewPacketBounds(),
+                })
+              );
               return;
             }
 
-            dispatch(updatePacket({
-              ...packet,
-              isDragging: false,
-            }));
+            dispatch(
+              updatePacket({
+                ...packet,
+                isDragging: false,
+              })
+            );
           }}
         />
       ))}

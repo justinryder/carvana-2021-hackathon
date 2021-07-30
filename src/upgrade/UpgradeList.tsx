@@ -4,7 +4,7 @@ import { RootState } from "../app/store";
 import { ShapeProps } from "../types/shapes";
 import { Upgrade } from "./Upgrade";
 import { purchase } from "./upgradeSlice";
-import {Group} from "react-konva";
+import { Group } from "react-konva";
 
 type UpgradeListProps = {} & ShapeProps;
 

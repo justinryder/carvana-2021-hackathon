@@ -1,4 +1,3 @@
-
 export const PACKET_WIDTH = 170;
 export const PACKET_HEIGHT = 200;
 
@@ -7,5 +6,3 @@ export const BUCKET_WIDTH = PACKET_WIDTH * bucketScalar;
 export const BUCKET_HEIGHT = PACKET_HEIGHT * bucketScalar;
 
 export const BUCKET_PACKET_DELTA_WIDTH = BUCKET_WIDTH - PACKET_WIDTH;
-
-

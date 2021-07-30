@@ -12,171 +12,196 @@ code {
     monospace;
 }
 
-
 @font-face {
-  font-family: 'Brandon Text';
+  font-family: "Brandon Text";
   font-weight: 200;
-  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-thin.otf) format("opentype");
+  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-thin.otf)
+    format("opentype");
 }
 
 @font-face {
-  font-family: 'Brandon Text';
+  font-family: "Brandon Text";
   font-weight: lighter;
-  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-light.otf) format("opentype");
+  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-light.otf)
+    format("opentype");
 }
 
 @font-face {
-  font-family: 'Brandon Text';
+  font-family: "Brandon Text";
   font-weight: light;
-  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-light.otf) format("opentype");
+  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-light.otf)
+    format("opentype");
 }
 
 @font-face {
-  font-family: 'Brandon Text';
+  font-family: "Brandon Text";
   font-weight: 300;
-  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-light.otf) format("opentype");
+  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-light.otf)
+    format("opentype");
 }
 
 @font-face {
-  font-family: 'Brandon Text';
+  font-family: "Brandon Text";
   font-weight: 400;
-  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-regular.otf) format("opentype");
+  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-regular.otf)
+    format("opentype");
 }
 
 @font-face {
-  font-family: 'Brandon Text';
+  font-family: "Brandon Text";
   font-weight: normal;
-  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-regular.otf) format("opentype");
+  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-regular.otf)
+    format("opentype");
 }
 
 @font-face {
-  font-family: 'Brandon Text';
+  font-family: "Brandon Text";
   font-weight: medium;
-  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-medium.otf) format("opentype");
+  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-medium.otf)
+    format("opentype");
 }
 
 @font-face {
-  font-family: 'Brandon Text';
+  font-family: "Brandon Text";
   font-weight: 500;
-  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-medium.otf) format("opentype");
+  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-medium.otf)
+    format("opentype");
 }
 
 @font-face {
-  font-family: 'Brandon Text';
+  font-family: "Brandon Text";
   font-weight: bold;
-  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-bold.otf) format("opentype");
+  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-bold.otf)
+    format("opentype");
 }
 
 @font-face {
-  font-family: 'Brandon Text';
+  font-family: "Brandon Text";
   font-weight: 700;
-  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-bold.otf) format("opentype");
+  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-bold.otf)
+    format("opentype");
 }
 
 @font-face {
-  font-family: 'Brandon Text';
+  font-family: "Brandon Text";
   font-weight: bolder;
-  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-black.otf) format("opentype");
+  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-black.otf)
+    format("opentype");
 }
 
 @font-face {
-  font-family: 'Brandon Text';
+  font-family: "Brandon Text";
   font-weight: 900;
-  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-black.otf) format("opentype");
+  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-black.otf)
+    format("opentype");
 }
 
 @font-face {
-  font-family: 'Brandon Text';
+  font-family: "Brandon Text";
   font-weight: 300;
-  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-light.otf) format("opentype");
+  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-light.otf)
+    format("opentype");
 }
 
 @font-face {
-  font-family: 'Brandon Text';
+  font-family: "Brandon Text";
   font-weight: 200;
   font-style: italic;
-  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-thinitalic.otf) format("opentype");
+  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-thinitalic.otf)
+    format("opentype");
 }
 
 @font-face {
-  font-family: 'Brandon Text';
+  font-family: "Brandon Text";
   font-weight: 300;
   font-style: italic;
-  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-lightitalic.otf) format("opentype");
+  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-lightitalic.otf)
+    format("opentype");
 }
 
 @font-face {
-  font-family: 'Brandon Text';
+  font-family: "Brandon Text";
   font-weight: 400;
   font-style: italic;
-  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-regularitalic.otf) format("opentype");
+  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-regularitalic.otf)
+    format("opentype");
 }
 
 @font-face {
-  font-family: 'Brandon Text';
+  font-family: "Brandon Text";
   font-weight: 500;
   font-style: italic;
-  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-mediumitalic.otf) format("opentype");
+  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-mediumitalic.otf)
+    format("opentype");
 }
 
 @font-face {
-  font-family: 'Brandon Text';
+  font-family: "Brandon Text";
   font-weight: 700;
   font-style: italic;
-  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-bolditalic.otf) format("opentype");
+  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-bolditalic.otf)
+    format("opentype");
 }
 
 @font-face {
-  font-family: 'Brandon Text';
+  font-family: "Brandon Text";
   font-weight: 900;
   font-style: italic;
-  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-blackitalic.otf) format("opentype");
+  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-blackitalic.otf)
+    format("opentype");
 }
 
 @font-face {
-  font-family: 'Brandon Text';
+  font-family: "Brandon Text";
   font-weight: lighter;
   font-style: italic;
-  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-thinitalic.otf) format("opentype");
+  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-thinitalic.otf)
+    format("opentype");
 }
 
 @font-face {
-  font-family: 'Brandon Text';
+  font-family: "Brandon Text";
   font-weight: normal;
   font-style: italic;
-  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-regularitalic.otf) format("opentype");
+  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-regularitalic.otf)
+    format("opentype");
 }
 
 @font-face {
-  font-family: 'Brandon Text';
+  font-family: "Brandon Text";
   font-weight: medium;
   font-style: italic;
-  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-mediumitalic.otf) format("opentype");
+  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-mediumitalic.otf)
+    format("opentype");
 }
 
 @font-face {
-  font-family: 'Brandon Text';
+  font-family: "Brandon Text";
   font-weight: bold;
   font-style: italic;
-  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-bolditalic.otf) format("opentype");
+  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-bolditalic.otf)
+    format("opentype");
 }
 
 @font-face {
-  font-family: 'Brandon Text';
+  font-family: "Brandon Text";
   font-weight: bolder;
   font-style: italic;
-  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-blackitalic.otf) format("opentype");
+  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-blackitalic.otf)
+    format("opentype");
 }
 
 @font-face {
-  font-family: 'Brandon Text';
-  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-regular.otf) format("opentype");
+  font-family: "Brandon Text";
+  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-regular.otf)
+    format("opentype");
 }
 
 @font-face {
-  font-family: 'Brandon Text';
+  font-family: "Brandon Text";
   font-style: italic;
-  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-regularitalic.otf) format("opentype");
+  src: url(https://assets.fastly.carvana.io/carma/assets/fonts/brandontext-regularitalic.otf)
+    format("opentype");
 }
 
 :root {
@@ -189,5 +214,7 @@ body {
 
 body,
 button {
-  font-family: 'Brandon Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-family: "Brandon Text", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol";
 }

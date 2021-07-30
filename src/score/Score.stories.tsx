@@ -1,16 +1,16 @@
-import React, {useReducer} from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import React, { useReducer } from "react";
+import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { Score } from './Score';
-import {initialState, scoreReducer} from "./scoreReducer";
-import {Button} from "../inputs/Button";
+import { Score } from "./Score";
+import { initialState, scoreReducer } from "./scoreReducer";
+import { Button } from "../inputs/Button";
 import ScoreActions from "./ScoreActions";
 
 export default {
-  title: 'Score',
+  title: "Score",
   component: Score,
   argTypes: {
-    backgroundColor: { control: 'color' },
+    backgroundColor: { control: "color" },
   },
 } as ComponentMeta<typeof Score>;
 
@@ -44,8 +44,8 @@ export const Primary: ComponentStory<typeof Score> = (args) => {
       {/*/>*/}
     </>
   );
-}
-Primary.storyName = 'Score';
+};
+Primary.storyName = "Score";
 Primary.args = {
   x: 5,
   y: 5,

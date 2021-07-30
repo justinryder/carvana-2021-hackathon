@@ -1,7 +1,7 @@
-import {ShapeProps} from "../types/shapes";
-import {FunctionComponent} from "react";
+import { ShapeProps } from "../types/shapes";
+import { FunctionComponent } from "react";
 import { Group, Rect, Text } from "react-konva";
-import { CarmaTheme } from "../theme/CarmaTheme"
+import { CarmaTheme } from "../theme/CarmaTheme";
 
 type BucketProps = {
   fill?: string;
@@ -33,7 +33,11 @@ export const Bucket: FunctionComponent<BucketProps> = ({
         x={0}
         y={10}
         width={width}
-        fill={fill === (CarmaTheme.color.white) ? CarmaTheme.color.black : CarmaTheme.color.white}
+        fill={
+          fill === CarmaTheme.color.white
+            ? CarmaTheme.color.black
+            : CarmaTheme.color.white
+        }
         fontStyle="bold"
         fontSize={CarmaTheme.font.size.xxlarge}
         fontFamily={CarmaTheme.font.family}

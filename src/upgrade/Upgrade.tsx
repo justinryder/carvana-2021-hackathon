@@ -1,14 +1,14 @@
 import { FunctionComponent } from "react";
-import {Group, Rect, Text} from "react-konva";
+import { Group, Rect, Text } from "react-konva";
 import { Upgrade as UpgradeType } from "./types";
 import { CarmaTheme } from "../theme/CarmaTheme";
 import { Button } from "../inputs/Button";
 import { ShapeProps } from "../types/shapes";
-import {padBox} from "../layout/padBox";
-import {layoutBox} from "../layout/layoutBox";
-import {Bounds} from "../layout/types";
-import {useSelector} from "react-redux";
-import {RootState} from "../app/store";
+import { padBox } from "../layout/padBox";
+import { layoutBox } from "../layout/layoutBox";
+import { Bounds } from "../layout/types";
+import { useSelector } from "react-redux";
+import { RootState } from "../app/store";
 
 type UpgradeProps = {
   upgrade: UpgradeType;
@@ -45,9 +45,9 @@ const UpgradeName = ({
   );
 };
 
-const currencyFormatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
+const currencyFormatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
 });
 
 const UpgradeCost = ({
@@ -123,52 +123,50 @@ export const Upgrade: FunctionComponent<UpgradeProps> = ({
     padding: padding,
   };
 
-  const bounds = padBox({
-    x: 0,
-    y: 0,
-    width,
-    height,
-  }, padding);
+  const bounds = padBox(
+    {
+      x: 0,
+      y: 0,
+      width,
+      height,
+    },
+    padding
+  );
 
   const nameBounds = layoutBox({
     bounds,
     width: bounds.width / 2,
     height: titleHeight,
-    align: 'top left',
+    align: "top left",
   });
 
   const costBounds = layoutBox({
     bounds,
     width: bounds.width / 2,
     height: titleHeight,
-    align: 'top right',
+    align: "top right",
   });
 
   const buttonBounds = layoutBox({
     bounds,
     width,
     height: buttonHeight,
-    align: 'bottom center',
+    align: "bottom center",
   });
 
   const descriptionYOffset = nameBounds.y + nameBounds.height + padding;
-  const descriptionBottomOffset = (2 * padding) + buttonHeight;
+  const descriptionBottomOffset = 2 * padding + buttonHeight;
   const descriptionBounds = layoutBox({
     bounds: {
       ...bounds,
       y: descriptionYOffset,
     },
     width,
-    height: height - descriptionYOffset - descriptionBottomOffset
+    height: height - descriptionYOffset - descriptionBottomOffset,
   });
 
   return (
-    <Group
-      x={x}
-      y={y}
-      width={width}
-      height={height}
-    >
+    <Group x={x} y={y} width={width} height={height}>
       <Rect
         width={width}
         height={height}
@@ -177,22 +175,10 @@ export const Upgrade: FunctionComponent<UpgradeProps> = ({
         x={0}
         y={0}
       />
-      <UpgradeName
-        {...internalProps}
-        bounds={nameBounds}
-      />
-      <UpgradeCost
-        {...internalProps}
-        bounds={costBounds}
-      />
-      <UpgradeDescription
-        {...internalProps}
-        bounds={descriptionBounds}
-      />
-      <UpgradeButton
-        {...internalProps}
-        bounds={buttonBounds}
-      />
+      <UpgradeName {...internalProps} bounds={nameBounds} />
+      <UpgradeCost {...internalProps} bounds={costBounds} />
+      <UpgradeDescription {...internalProps} bounds={descriptionBounds} />
+      <UpgradeButton {...internalProps} bounds={buttonBounds} />
     </Group>
-  )
+  );
 };

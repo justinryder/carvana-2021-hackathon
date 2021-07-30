@@ -1,4 +1,4 @@
-import {Bounds} from "./layout/types";
+import { Bounds } from "./layout/types";
 
 export const bounds = (x, y, width, height): Bounds => ({
   x,

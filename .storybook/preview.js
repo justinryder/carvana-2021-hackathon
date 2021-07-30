@@ -1,6 +1,6 @@
-import {Layer, Stage} from "react-konva";
+import { Layer, Stage } from "react-konva";
 import React from "react";
-import '../src/index.css';
+import "../src/index.css";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -10,7 +10,7 @@ export const parameters = {
       date: /Date$/,
     },
   },
-}
+};
 
 export const decorators = [
   (Story) => (

@@ -1,5 +1,5 @@
-import { CarmaThemeType, FontColor } from './types';
-import { CarmaThemeColorPalette } from './ColorPalettes/CarmaThemeColorPalette';
+import { CarmaThemeType, FontColor } from "./types";
+import { CarmaThemeColorPalette } from "./ColorPalettes/CarmaThemeColorPalette";
 
 const {
   // blueLightest,
@@ -28,7 +28,7 @@ const {
   pinkMediumDark,
   pinkMedium,
   shadow,
-  transparent
+  transparent,
 } = CarmaThemeColorPalette;
 
 const fontColors: FontColor = {

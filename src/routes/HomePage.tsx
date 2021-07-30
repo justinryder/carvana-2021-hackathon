@@ -1,10 +1,10 @@
-import {Group, Layer, Rect, Text} from 'react-konva';
-import {useWindowBounds} from "../useWindowSize";
-import {layoutBox, moveBelow} from "../layout/layoutBox";
-import {Heading} from "./Heading";
-import {useLinks} from "./useLinks";
-import {Button} from "../inputs/Button";
-import {CarmaTheme} from "../theme/CarmaTheme";
+import { Group, Layer, Rect, Text } from "react-konva";
+import { useWindowBounds } from "../useWindowSize";
+import { layoutBox, moveBelow } from "../layout/layoutBox";
+import { Heading } from "./Heading";
+import { useLinks } from "./useLinks";
+import { Button } from "../inputs/Button";
+import { CarmaTheme } from "../theme/CarmaTheme";
 
 export const HomePage = () => {
   const links = useLinks();
@@ -14,7 +14,7 @@ export const HomePage = () => {
     bounds: windowBounds,
     width: 500,
     height: 500,
-    align: 'center center',
+    align: "center center",
     padding: 50,
   });
 
@@ -26,7 +26,7 @@ export const HomePage = () => {
     },
     width: 400,
     height: 20,
-    align: 'top center',
+    align: "top center",
   });
 
   const subheadingBounds = moveBelow({
@@ -37,7 +37,7 @@ export const HomePage = () => {
   const subheading2Bounds = moveBelow({
     bounds: subheadingBounds,
     margin: 5,
-  })
+  });
 
   const playButtonBounds = layoutBox({
     bounds: {
@@ -47,7 +47,7 @@ export const HomePage = () => {
     },
     width: 200,
     height: 50,
-    align: 'top center',
+    align: "top center",
   });
 
   const creditsButtonBounds = moveBelow({
@@ -66,11 +66,7 @@ export const HomePage = () => {
           fill={CarmaTheme.color.foreground}
           stroke={CarmaTheme.color.border}
         />
-        <Heading
-          text="Reg Packets, Please"
-          fontSize={42}
-          {...headingBounds}
-        />
+        <Heading text="Reg Packets, Please" fontSize={42} {...headingBounds} />
         <Heading
           text="Built By Team 115 Degrees"
           fontSize={CarmaTheme.font.size.xlarge}
@@ -96,4 +92,4 @@ export const HomePage = () => {
       </Group>
     </Layer>
   );
-}
+};

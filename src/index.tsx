@@ -3,14 +3,14 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import FontFaceObserver from 'fontfaceobserver';
+import FontFaceObserver from "fontfaceobserver";
 
 Promise.all([
-  new FontFaceObserver('Brandon Text', {
-    weight: 'bold',
+  new FontFaceObserver("Brandon Text", {
+    weight: "bold",
   }).load(),
-  new FontFaceObserver('Brandon Text', {
-    weight: 'normal',
+  new FontFaceObserver("Brandon Text", {
+    weight: "normal",
   }).load(),
 ]).then(() => {
   ReactDOM.render(

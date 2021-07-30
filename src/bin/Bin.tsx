@@ -1,11 +1,19 @@
 import { Group, Text, Rect } from "react-konva";
-import {CarmaTheme} from "../theme/CarmaTheme";
-import {layoutBox, moveBelow} from "../layout/layoutBox";
-import {Envelope} from "../envelope/Envelope";
+import { CarmaTheme } from "../theme/CarmaTheme";
+import { layoutBox, moveBelow } from "../layout/layoutBox";
+import { Envelope } from "../envelope/Envelope";
 import React from "react";
-import {PACKET_HEIGHT, PACKET_WIDTH} from "../constants";
+import { PACKET_HEIGHT, PACKET_WIDTH } from "../constants";
 
-export const Bin = ({ title, x, y, width, height, onClick = () => {}, hasEnvelope }) => {
+export const Bin = ({
+  title,
+  x,
+  y,
+  width,
+  height,
+  onClick = () => {},
+  hasEnvelope,
+}) => {
   const bounds = {
     x,
     y,
@@ -18,14 +26,14 @@ export const Bin = ({ title, x, y, width, height, onClick = () => {}, hasEnvelop
     width,
     height,
     padding: 10,
-    align: 'top center',
+    align: "top center",
   });
 
   const envelopeBounds = layoutBox({
     bounds,
     width: PACKET_WIDTH,
     height: PACKET_HEIGHT,
-    align: 'bottom center',
+    align: "bottom center",
     padding: 10,
   });
 
@@ -46,11 +54,7 @@ export const Bin = ({ title, x, y, width, height, onClick = () => {}, hasEnvelop
         {...textBounds}
         listening={false}
       />
-      {hasEnvelope &&
-        <Envelope
-          {...envelopeBounds}
-        />
-      }
+      {hasEnvelope && <Envelope {...envelopeBounds} />}
     </>
-  )
+  );
 };
