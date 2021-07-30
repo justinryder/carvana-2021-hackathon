@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Upgrade, StoreList } from "./types";
+import { Upgrade } from "./types";
 import { upgrades } from "./upgrades";
 
 export type UpgradeState = {
