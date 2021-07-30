@@ -2,7 +2,7 @@ import {Group} from "react-konva";
 import {UpgradeList} from "./upgrade/UpgradeList";
 import {completePacket} from "./upgrade/upgradeSlice";
 import {Score} from "./score/Score";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "./app/store";
 import {Packet} from "./packets/Packet";
@@ -20,7 +20,6 @@ const padding = 5;
 
 const randomItem = items => items[Math.floor(Math.random()*items.length)];
 
-const getNewPacketBounds = () => bounds(500, 50, PACKET_WIDTH, PACKET_HEIGHT);
 const getNewPacketType = () => randomItem(packetTypes);
 
 const packetTypes = Object.values(PacketType);
@@ -32,6 +31,14 @@ export const Game = () => {
   const dispatch = useDispatch();
 
   const windowBounds = useWindowBounds();
+
+  const getNewPacketBounds = () => layoutBox({
+    bounds: windowBounds,
+    width: PACKET_WIDTH,
+    height: PACKET_HEIGHT,
+    align: 'top center',
+    padding: 50,
+  });
 
   const [packetType, setPacketType] = useState(getNewPacketType());
   const [packetBounds, setPacketBounds] = useState(getNewPacketBounds);
