@@ -1,6 +1,6 @@
 // visual for an individual reg packet
 
-import {useState} from "react";
+import React, {useState} from "react";
 import {KonvaNodeEvents, Rect, Group, Text, TextPath, Line} from "react-konva";
 import Konva from "konva";
 import { CarmaTheme } from '../theme/CarmaTheme';
@@ -30,8 +30,8 @@ type PacketProps = {
 export const Packet = ({
   labelreg = 'CAR',
   labelbold = 'VANA',
-  backgroundColor = CarmaTheme.color.callToAction,
-  textColor = CarmaTheme.font.color.white,
+  //backgroundColor = CarmaTheme.color.callToAction,
+  //textColor = CarmaTheme.font.color.white,
   x,
   y,
   width = PACKET_WIDTH,
@@ -39,7 +39,7 @@ export const Packet = ({
   onClick,
   onDrag,
   onDragEnd,
-  draggable,
+  //draggable,
   packetType = PacketType.Title,
 }: PacketProps) => {
   const [clicking, setClicking] = useState(false);
@@ -118,18 +118,19 @@ export const Packet = ({
         text={getPacketTypeLabel(packetType)}
         x={10}
         y={10}
-        fill={CarmaTheme.color.white}
+        fill={packetType === ("trade") ? CarmaTheme.color.black : CarmaTheme.color.white}
         fontFamily={CarmaTheme.font.family}
         fontStyle="bold"
         fontSize={28}
       />
+      
       <TextPath
         text={labelreg}
         fontFamily={CarmaTheme.font.family}
         fontSize={CarmaTheme.font.size.large}
         x={10}
         y={0}
-        fill={textColor}
+        fill={packetType === ("trade") ? CarmaTheme.color.callToAction : CarmaTheme.color.white} //Put this back in textColor
         verticalAlign="middle"
         align="left"
         listening={false}
@@ -142,12 +143,14 @@ export const Packet = ({
         fontStyle="bold"
         x={10}
         y={0}
-        fill={textColor}
+        fill={packetType === ("trade") ? CarmaTheme.color.callToAction : CarmaTheme.color.white}
         verticalAlign="middle"
         align="left"
         listening={false}
         data={`M 5, ${height - carWidth} L 5, ${height - 100}`}
       />
+      {packetType !== ("treasury") &&
+      <>
       <Line
         stroke={"black"}
         strokeWidth={1}
@@ -163,6 +166,8 @@ export const Packet = ({
         strokeWidth={1}
         points={[width - 10, 9, width - 2, 9]}
       />
+      </>}
+
     </Group>
   )
 };
