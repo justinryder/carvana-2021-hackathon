@@ -1,6 +1,13 @@
 import { Group } from "react-konva";
 import { UpgradeList } from "./upgrade/UpgradeList";
-import {completePacket, getBuckets, getPackets, updatePacket} from "./upgrade/upgradeSlice";
+import {
+  completePacket,
+  getBuckets,
+  getEnvelopeCount, getNextEnvelope,
+  getPackets,
+  openEnvelope,
+  updatePacket
+} from "./upgrade/upgradeSlice";
 import { Score } from "./score/Score";
 import React, {useCallback, useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,6 +30,8 @@ import {
 import { EnvelopeStack } from "./envelope/EnvelopeStack";
 import {Envelope} from "./envelope/Envelope";
 import { debounce } from 'lodash';
+import {Bin} from "./bin/Bin";
+import {getNewPacketBounds} from "./envelope/utils";
 
 const padding = 5;
 
@@ -46,20 +55,14 @@ export const Game = () => {
     }));
   }, 10), [dispatch]);
 
-  const windowBounds = useWindowBounds();
-
-  const getNewPacketBounds = () =>
-    layoutBox({
-      bounds: windowBounds,
-      width: PACKET_WIDTH,
-      height: PACKET_HEIGHT,
-      align: "top center",
-      padding: 50,
-    });
-
-  const envelopes = useSelector((state: RootState) => state.upgrades.envelopes);
+  const envelopeCount = useSelector(getEnvelopeCount);
+  const nextEnvelope = useSelector(getNextEnvelope);
   const packets = useSelector(getPackets);
   const buckets = useSelector(getBuckets);
+
+  const openTopEnvelope = () => {
+    dispatch(openEnvelope(nextEnvelope));
+  };
 
   return (
     <Group x={padding} y={padding}>
@@ -76,6 +79,16 @@ export const Game = () => {
         <UpgradeList x={0} y={105} />
       </Group>
 
+      <Bin
+        title={`Inbound Envelopes (${envelopeCount})`}
+        x={350}
+        y={0}
+        width={BUCKET_WIDTH}
+        height={BUCKET_HEIGHT}
+        hasEnvelope={Boolean(nextEnvelope)}
+        onClick={openTopEnvelope}
+      />
+
       {buckets.map((bucket) => (
         <Bucket
           key={bucket.bucketType}
@@ -85,16 +98,14 @@ export const Game = () => {
         />
       ))}
 
-      {envelopes.map((envelope, index) => (
-        <Envelope
-          key={envelope.id}
-          packetType={envelope.packet.packetType}
-          x={310 + (index * 5)}
-          y={10 + (index * 3)}
-          clickable={index === envelopes.length - 1}
-          envelope={envelope}
-        />
-      ))}
+      <Bin
+        title={`Opened Packets (${packets.length})`}
+        x={650}
+        y={0}
+        width={BUCKET_WIDTH}
+        height={BUCKET_HEIGHT}
+        hasEnvelope={false}
+      />
 
       {packets.map((packet) => (
         <Packet

@@ -154,6 +154,15 @@ export const getEnvelopes = createSelector([
   getState,
 ], state => state.envelopes);
 
+export const getEnvelopeCount = createSelector([
+  getEnvelopes,
+], (envelopes) => envelopes.length);
+
+export const getNextEnvelope = createSelector([
+  getEnvelopes,
+  getEnvelopeCount,
+], (envelopes, count) => count ? envelopes[count - 1] : null);
+
 export const __getBuckets = createSelector([
   _getBuckets,
   getWindowBounds,
