@@ -1,24 +1,30 @@
-import {Group} from "react-konva";
-import {UpgradeList} from "./upgrade/UpgradeList";
-import {completePacket} from "./upgrade/upgradeSlice";
-import {Score} from "./score/Score";
-import React, {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "./app/store";
-import {Packet} from "./packets/Packet";
-import {CarmaTheme} from "./theme/CarmaTheme";
-import {boxIntersection} from "./collision/boxIntersections";
-import {bounds, move} from "./bounds";
-import {useWindowBounds} from "./useWindowSize";
-import {Bucket} from "./bucket/Bucket";
-import {layoutBox, moveRight} from "./layout/layoutBox";
-import {PacketType} from "./packets/types";
-import {getBucketLabel, getPacketColor} from "./packets/PacketTypeLabelMap";
-import {BUCKET_HEIGHT, BUCKET_WIDTH, PACKET_HEIGHT, PACKET_WIDTH} from "./constants";
+import { Group } from "react-konva";
+import { UpgradeList } from "./upgrade/UpgradeList";
+import { completePacket } from "./upgrade/upgradeSlice";
+import { Score } from "./score/Score";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "./app/store";
+import { Packet } from "./packets/Packet";
+import { CarmaTheme } from "./theme/CarmaTheme";
+import { boxIntersection } from "./collision/boxIntersections";
+import { bounds, move } from "./bounds";
+import { useWindowBounds } from "./useWindowSize";
+import { Bucket } from "./bucket/Bucket";
+import { layoutBox, moveRight } from "./layout/layoutBox";
+import { PacketType } from "./packets/types";
+import { getBucketLabel, getPacketColor } from "./packets/PacketTypeLabelMap";
+import {
+  BUCKET_HEIGHT,
+  BUCKET_WIDTH,
+  PACKET_HEIGHT,
+  PACKET_WIDTH,
+} from "./constants";
+import { EnvelopeStack } from "./envelope/EnvelopeStack";
 
 const padding = 5;
 
-const randomItem = items => items[Math.floor(Math.random()*items.length)];
+const randomItem = (items) => items[Math.floor(Math.random() * items.length)];
 
 const getNewPacketType = () => randomItem(packetTypes);
 
@@ -32,13 +38,14 @@ export const Game = () => {
 
   const windowBounds = useWindowBounds();
 
-  const getNewPacketBounds = () => layoutBox({
-    bounds: windowBounds,
-    width: PACKET_WIDTH,
-    height: PACKET_HEIGHT,
-    align: 'top center',
-    padding: 50,
-  });
+  const getNewPacketBounds = () =>
+    layoutBox({
+      bounds: windowBounds,
+      width: PACKET_WIDTH,
+      height: PACKET_HEIGHT,
+      align: "top center",
+      padding: 50,
+    });
 
   const [packetType, setPacketType] = useState(getNewPacketType());
   const [packetBounds, setPacketBounds] = useState(getNewPacketBounds);
@@ -46,16 +53,18 @@ export const Game = () => {
   const buckets = packetTypes.reduce((result, bucketType, index) => {
     const isFirst = index === 0;
 
-    const bounds = isFirst ? layoutBox({
-      bounds: windowBounds,
-      width: BUCKET_WIDTH,
-      height: BUCKET_HEIGHT,
-      padding: 25,
-      align: 'bottom left',
-    }) : moveRight({
-      bounds: result[index - 1].bounds,
-      margin: PACKET_WIDTH + 15,
-    });
+    const bounds = isFirst
+      ? layoutBox({
+          bounds: windowBounds,
+          width: BUCKET_WIDTH,
+          height: BUCKET_HEIGHT,
+          padding: 25,
+          align: "bottom left",
+        })
+      : moveRight({
+          bounds: result[index - 1].bounds,
+          margin: PACKET_WIDTH + 15,
+        });
 
     const isPacketInBucket = boxIntersection(bounds, packetBounds);
 
@@ -98,7 +107,7 @@ export const Game = () => {
         <UpgradeList x={0} y={105} />
       </Group>
 
-      {buckets.map(bucket => (
+      {buckets.map((bucket) => (
         <Bucket
           key={bucket.bucketType}
           {...bucket.bounds}
@@ -107,21 +116,21 @@ export const Game = () => {
         />
       ))}
 
-      <Packet
+      <EnvelopeStack x={packetBounds.x} y={packetBounds.y} />
+
+      {/* <Packet
         packetType={packetType}
         draggable={true}
         x={packetBounds.x}
         y={packetBounds.y}
-        onDrag={event => {
-          setPacketBounds(move(
-            packetBounds,
-            event.target.x(),
-            event.target.y(),
-          ));
+        onDrag={(event) => {
+          setPacketBounds(
+            move(packetBounds, event.target.x(), event.target.y())
+          );
         }}
         onDragEnd={() => {
-          const bucketMatch = buckets.find(bucket => bucket.packetMatch);
-          const bucketError = buckets.find(bucket => bucket.packetError);
+          const bucketMatch = buckets.find((bucket) => bucket.packetMatch);
+          const bucketError = buckets.find((bucket) => bucket.packetError);
 
           if (bucketMatch) {
             dispatch(completePacket(packetType)); // TODO: maybe count packet types separately
@@ -131,7 +140,7 @@ export const Game = () => {
             setPacketBounds(getNewPacketBounds());
           }
         }}
-      />
+      /> */}
     </Group>
   );
 };

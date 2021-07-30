@@ -1,7 +1,8 @@
+import { PacketType } from "../packets/types";
+
 export type Packet = {
   id: string;
-  label: string;
-  color: string;
+  packetType: PacketType;
 };
 
 export type Envelope = {

@@ -17,11 +17,12 @@ export const EnvelopeStack: FunctionComponent<EnvelopeStackProps> = ({
     <>
       {envelopes.map((envelope) => (
         <Envelope
+          key={envelope.id}
           x={x}
           y={y}
           height={height}
           width={width}
-          packetBackgroundColor={envelope.packet.color}
+          packetType={envelope.packet.packetType}
         />
       ))}
     </>

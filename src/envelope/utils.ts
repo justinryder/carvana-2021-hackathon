@@ -1,20 +1,15 @@
 import { v4 as uuid } from "uuid";
 import { Packet, Envelope } from "./types";
-import { PacketTypeLabelMap } from "../packets/PacketTypeLabelMap";
+import { PacketType } from "../packets/types";
 
-const getRandomNumber = (max: number) => Math.floor(Math.random() * max);
-
-const chooseRandomPacketLabel = () => {
-  const rndNum = getRandomNumber(5);
-
-  return Object.values(PacketTypeLabelMap)[rndNum];
-};
+const randomItem = (items) => items[Math.floor(Math.random() * items.length)];
+const packetTypes = Object.values(PacketType);
+const getNewPacketType = () => randomItem(packetTypes);
 
 export const makePacket = (): Packet => {
   return {
     id: uuid(),
-    label: chooseRandomPacketLabel(),
-    color: "blue",
+    packetType: getNewPacketType(),
   };
 };
 

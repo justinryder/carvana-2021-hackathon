@@ -3,9 +3,10 @@ import { ShapeProps } from "../types/shapes";
 import { FunctionComponent, useState } from "react";
 import { CarmaTheme } from "../theme/CarmaTheme";
 import { Packet } from "../packets/Packet";
+import { PacketType } from "../packets/types";
 
 type EnvelopeProps = {
-  packetBackgroundColor: string;
+  packetType: PacketType;
 } & ShapeProps;
 
 export const Envelope: FunctionComponent<EnvelopeProps> = ({
@@ -13,7 +14,7 @@ export const Envelope: FunctionComponent<EnvelopeProps> = ({
   y,
   height = 100,
   width = 85,
-  packetBackgroundColor,
+  packetType,
 }) => {
   const labelreg = "CAR";
   const labelbold = "VANA";
@@ -26,7 +27,7 @@ export const Envelope: FunctionComponent<EnvelopeProps> = ({
         <Packet
           x={x}
           y={y}
-          backgroundColor={packetBackgroundColor}
+          packetType={packetType}
           draggable
           onDrag={() => {}}
           onDragEnd={() => {}}

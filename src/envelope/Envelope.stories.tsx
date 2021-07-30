@@ -1,4 +1,4 @@
-import { CarmaTheme } from "../theme/CarmaTheme";
+import { PacketType } from "../packets/types";
 import { Envelope } from "./Envelope";
 
 export default {
@@ -7,7 +7,7 @@ export default {
 
 export const EnvelopeBox = ({ width, height, x, y }) => (
   <Envelope
-    packetBackgroundColor={CarmaTheme.color.team.insideAdvocate}
+    packetType={PacketType.Title}
     width={width}
     height={height}
     x={x}
