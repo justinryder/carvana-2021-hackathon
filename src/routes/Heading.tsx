@@ -8,6 +8,7 @@ export const Heading = ({
   width = 400,
   height = 100,
   fontSize = CarmaTheme.font.size.xxlarge,
+  ...props
 }) => {
   return (
     <Text
@@ -21,6 +22,7 @@ export const Heading = ({
       fontSize={fontSize}
       align="center"
       verticalAlign="middle"
+      {...props}
     />
   );
 };

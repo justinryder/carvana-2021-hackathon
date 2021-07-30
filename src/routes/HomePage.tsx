@@ -1,19 +1,22 @@
-import { Group, Layer, Rect, Text } from "react-konva";
+import {Group, Image, Layer, Rect, Text} from "react-konva";
 import { useWindowBounds } from "../useWindowSize";
 import { layoutBox, moveBelow } from "../layout/layoutBox";
 import { Heading } from "./Heading";
 import { useLinks } from "./useLinks";
 import { Button } from "../inputs/Button";
 import { CarmaTheme } from "../theme/CarmaTheme";
+import useImage from "use-image";
 
 export const HomePage = () => {
   const links = useLinks();
   const windowBounds = useWindowBounds();
+  const [image] = useImage('/hero_image_blue_trees.png');
+  const [logo] = useImage('/4_Hackathon_theme_secondary_singlecolor_light.png');
 
   const bounds = layoutBox({
     bounds: windowBounds,
-    width: 500,
-    height: 500,
+    width: 700,
+    height: 600,
     align: "center center",
     padding: 50,
   });
@@ -22,7 +25,7 @@ export const HomePage = () => {
     bounds: {
       ...bounds,
       x: 0,
-      y: 50,
+      y: 100,
     },
     width: 400,
     height: 20,
@@ -43,7 +46,7 @@ export const HomePage = () => {
     bounds: {
       ...bounds,
       x: 0,
-      y: 220,
+      y: 320,
     },
     width: 200,
     height: 50,
@@ -58,12 +61,24 @@ export const HomePage = () => {
   return (
     <Layer>
       <Rect {...windowBounds} fill={CarmaTheme.color.background} />
+      <Image {...windowBounds} image={image} />
+      <Image
+        image={logo}
+        {...layoutBox({
+          bounds: windowBounds,
+          // 1068x625
+          width: 1068 * 0.3,
+          height: 625 * 0.3,
+          align: 'top left',
+          padding: 25,
+        })}
+      />
       <Group {...bounds}>
         <Rect
           {...bounds}
           x={0}
           y={0}
-          fill={CarmaTheme.color.foreground}
+          fill={CarmaTheme.color.background}
           stroke={CarmaTheme.color.border}
         />
         <Heading text="Reg Packets, Please" fontSize={42} {...headingBounds} />

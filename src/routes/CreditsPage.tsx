@@ -1,10 +1,11 @@
-import { Group, Layer, Rect, Text } from "react-konva";
+import { Group, Layer, Rect, Text, Image } from "react-konva";
 import { Heading } from "./Heading";
 import { useWindowBounds } from "../useWindowSize";
 import { layoutBox, moveBelow } from "../layout/layoutBox";
 import { useCallback, useEffect, useLayoutEffect, useState } from "react";
 import { useAnimationFrame } from "../useAnimationFrame";
 import { CarmaTheme } from "../theme/CarmaTheme";
+import useImage from "use-image";
 
 // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 function shuffle(array) {
@@ -36,6 +37,9 @@ const names = [
 const scrollSpeed = 80;
 
 export const CreditsPage = () => {
+  const [image] = useImage('/hero_image_blue_trees.png');
+  const [logo] = useImage('/4_Hackathon_theme_secondary_singlecolor_light.png');
+
   const windowBounds = useWindowBounds();
 
   const [offset, setOffset] = useState(windowBounds.height);
@@ -63,7 +67,7 @@ export const CreditsPage = () => {
 
   const bounds = layoutBox({
     bounds: windowBounds,
-    width: 500,
+    width: 800,
     height: 500,
     align: "top center",
     padding: 50,
@@ -75,7 +79,7 @@ export const CreditsPage = () => {
       x: 0,
       y: 50,
     },
-    width: 500,
+    width: 800,
     height: 20,
     align: "top center",
   });
@@ -97,21 +101,39 @@ export const CreditsPage = () => {
   return (
     <Layer>
       <Rect {...windowBounds} fill={CarmaTheme.color.background} />
+      <Image {...windowBounds} image={image} />
+      {/*<Image*/}
+      {/*  image={logo}*/}
+      {/*  {...layoutBox({*/}
+      {/*    bounds: windowBounds,*/}
+      {/*    // 1068x625*/}
+      {/*    width: 1068 * 0.3,*/}
+      {/*    height: 625 * 0.3,*/}
+      {/*    align: 'top left',*/}
+      {/*    padding: 25,*/}
+      {/*  })}*/}
+      {/*/>*/}
       <Group {...windowBounds} y={offset}>
         <Group {...bounds}>
           <Heading
             text="Credits"
             // fontSize={CarmaTheme.font.size.xxlarge}
-            fontSize={72}
+            fontSize={150}
             {...headingBounds}
+            fill={CarmaTheme.color.white}
+            stroke={CarmaTheme.color.black}
+            strokeWidth={5}
           />
-          {credits.map((credit) => (
+          {credits.map((credit, index) => (
             <Heading
               key={credit.name}
               text={credit.name}
               // fontSize={CarmaTheme.font.size.xlarge}
-              fontSize={56}
+              fontSize={index === 0 ? 100 : 75}
               {...credit.bounds}
+              fill={CarmaTheme.color.white}
+              stroke={CarmaTheme.color.black}
+              strokeWidth={5}
             />
           ))}
         </Group>
