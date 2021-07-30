@@ -15,16 +15,16 @@ export const EnvelopeStack: FunctionComponent<EnvelopeStackProps> = ({
   const envelopes = useSelector((state: RootState) => state.upgrades.envelopes);
   return (
     <>
-      {envelopes.map((envelope) => (
-        <Envelope
-          key={envelope.id}
-          x={x}
-          y={y}
-          height={height}
-          width={width}
-          packetType={envelope.packet.packetType}
-        />
-      ))}
+      {/*{envelopes.map((envelope) => (*/}
+      {/*  <Envelope*/}
+      {/*    key={envelope.id}*/}
+      {/*    x={x}*/}
+      {/*    y={y}*/}
+      {/*    height={height}*/}
+      {/*    width={width}*/}
+      {/*    packetType={envelope.packet.packetType}*/}
+      {/*  />*/}
+      {/*))}*/}
     </>
   );
 };

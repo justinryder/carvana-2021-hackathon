@@ -5,17 +5,17 @@ export default {
   title: "Envelope",
 };
 
-export const EnvelopeBox = ({ width, height, x, y }) => (
-  <Envelope
-    packetType={PacketType.Title}
-    width={width}
-    height={height}
-    x={x}
-    y={y}
-  />
-);
-
-EnvelopeBox.args = {
-  x: 100,
-  y: 100,
-};
+// export const EnvelopeBox = ({ width, height, x, y }) => (
+//   <Envelope
+//     packetType={PacketType.Title}
+//     width={width}
+//     height={height}
+//     x={x}
+//     y={y}
+//   />
+// );
+//
+// EnvelopeBox.args = {
+//   x: 100,
+//   y: 100,
+// };

@@ -21,6 +21,7 @@ import {
   PACKET_WIDTH,
 } from "./constants";
 import { EnvelopeStack } from "./envelope/EnvelopeStack";
+import {Envelope} from "./envelope/Envelope";
 
 const padding = 5;
 
@@ -47,8 +48,12 @@ export const Game = () => {
       padding: 50,
     });
 
-  const [packetType, setPacketType] = useState(getNewPacketType());
-  const [packetBounds, setPacketBounds] = useState(getNewPacketBounds);
+  const envelopes = useSelector((state: RootState) => state.upgrades.envelopes);
+  const packets = useSelector((state: RootState) => state.upgrades.packets);
+  console.log(packets);
+
+  // const [packetType, setPacketType] = useState(getNewPacketType());
+  // const [packetBounds, setPacketBounds] = useState(getNewPacketBounds);
 
   const buckets = packetTypes.reduce((result, bucketType, index) => {
     const isFirst = index === 0;
@@ -66,10 +71,10 @@ export const Game = () => {
           margin: PACKET_WIDTH + 15,
         });
 
-    const isPacketInBucket = boxIntersection(bounds, packetBounds);
+    const isPacketInBucket = false;//boxIntersection(bounds, packetBounds);
 
-    const packetMatch = isPacketInBucket && packetType === bucketType;
-    const packetError = isPacketInBucket && packetType !== bucketType;
+    const packetMatch = false;//isPacketInBucket && packetType === bucketType;
+    const packetError = false;//isPacketInBucket && packetType !== bucketType;
 
     let color = getPacketColor(bucketType);
     if (packetMatch) {
@@ -89,8 +94,6 @@ export const Game = () => {
 
     return result;
   }, []);
-
-  const isPackedInWindow = boxIntersection(windowBounds, packetBounds);
 
   return (
     <Group x={padding} y={padding}>
@@ -116,7 +119,47 @@ export const Game = () => {
         />
       ))}
 
-      <EnvelopeStack x={packetBounds.x} y={packetBounds.y} />
+      {envelopes.map((envelope, index) => (
+        <Envelope
+          key={envelope.id}
+          packetType={envelope.packet.packetType}
+          x={310 + (index * 5)}
+          y={10 + (index * 3)}
+          clickable={index === envelopes.length - 1}
+          envelope={envelope}
+        />
+      ))}
+
+      {packets.map((packet) => (
+        <Packet
+          key={packet.id}
+          packetType={packet.packetType}
+          draggable={true}
+          x={packet.bounds.x}
+          y={packet.bounds.y}
+          onDrag={(event) => {
+            // setPacketBounds(
+            //   move(packetBounds, event.target.x(), event.target.y())
+            // );
+          }}
+          onDragEnd={() => {
+            const bucketMatch = buckets.find((bucket) => bucket.packetMatch);
+            const bucketError = buckets.find((bucket) => bucket.packetError);
+
+            const isPackedInWindow = false;//boxIntersection(windowBounds, packetBounds);
+
+            if (bucketMatch) {
+              dispatch(completePacket(packet.packetType)); // TODO: maybe count packet types separately
+              // setPacketBounds(getNewPacketBounds());
+              // setPacketType(getNewPacketType());
+            } else if (!isPackedInWindow || bucketError) {
+              // setPacketBounds(getNewPacketBounds());
+            }
+          }}
+        />
+      ))}
+
+      {/*<EnvelopeStack x={packetBounds.x} y={packetBounds.y} />*/}
 
       {/* <Packet
         packetType={packetType}

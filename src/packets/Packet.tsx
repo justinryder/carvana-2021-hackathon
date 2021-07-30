@@ -68,6 +68,20 @@ export const Packet = ({
     setClicking(false);
   };
 
+  const handleDragMove = (event: Konva.KonvaEventObject<DragEvent>) => {
+    if (onDrag) {
+      onDrag(event);
+    }
+  };
+
+  const handleDragEnd = (event: Konva.KonvaEventObject<DragEvent>) => {
+    if (onDragEnd) {
+      onDragEnd(event);
+    }
+
+    setClicking(false);
+  };
+
   const scalar = clicking ? 1.1 : 1;
 
   const carWidth = 45;
@@ -89,8 +103,8 @@ export const Packet = ({
       scaleY={scalar}
       offsetX={(width - width * scalar) / -2}
       offsetY={(height - height * scalar) / -2}
-      onDragMove={onDrag}
-      onDragEnd={onDragEnd}
+      onDragMove={handleDragMove}
+      onDragEnd={handleDragEnd}
     >
       <Rect
         width={width}
