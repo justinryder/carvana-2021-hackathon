@@ -13,6 +13,7 @@
     "@types/react-dom": "^17.0.0",
     "fontfaceobserver": "^2.1.0",
     "konva": "^8.1.1",
+    "lodash": "^4.17.21",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-konva": "^17.0.2-5",
@@ -62,12 +63,12 @@
     ]
   },
   "devDependencies": {
-    "prettier": "^2.3.2",
     "@storybook/addon-actions": "^6.3.6",
     "@storybook/addon-essentials": "^6.3.6",
     "@storybook/addon-links": "^6.3.6",
     "@storybook/node-logger": "^6.3.6",
     "@storybook/preset-create-react-app": "^3.2.0",
-    "@storybook/react": "^6.3.6"
+    "@storybook/react": "^6.3.6",
+    "prettier": "^2.3.2"
   }
 }

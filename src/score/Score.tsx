@@ -1,17 +1,17 @@
 // display for the current score
 
-import {CarmaTheme} from "../theme/CarmaTheme";
-import {Group, Rect, Text} from "react-konva";
-import { Score as ScoreType } from './types';
-import {padBox} from "../layout/padBox";
-import {layoutBox} from "../layout/layoutBox";
+import { CarmaTheme } from "../theme/CarmaTheme";
+import { Group, Rect, Text } from "react-konva";
+import { Score as ScoreType } from "./types";
+import { padBox } from "../layout/padBox";
+import { layoutBox } from "../layout/layoutBox";
 
 type ShapeProps = {
   x: number;
   y: number;
   width?: number;
   height?: number;
-}
+};
 
 type ScoreProps = {
   score: ScoreType;
@@ -20,9 +20,9 @@ type ScoreProps = {
 
 const textHeight = 20;
 
-const currencyFormatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
+const currencyFormatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
 });
 
 export const Score = ({
@@ -33,12 +33,15 @@ export const Score = ({
   padding = 5,
   score,
 }: ScoreProps) => {
-  const bounds = padBox({
-    x: 0,
-    y: 0,
-    width,
-    height,
-  }, padding);
+  const bounds = padBox(
+    {
+      x: 0,
+      y: 0,
+      width,
+      height,
+    },
+    padding
+  );
 
   const packetsCompletedBounds = layoutBox({
     bounds,
@@ -65,12 +68,7 @@ export const Score = ({
   });
 
   return (
-    <Group
-      x={x}
-      y={y}
-      width={width}
-      height={height}
-    >
+    <Group x={x} y={y} width={width} height={height}>
       <Rect
         width={width}
         height={height}
@@ -94,12 +92,14 @@ export const Score = ({
         {...moneyBounds}
       />
       <Text
-        text={`Income per Packet: ${currencyFormatter.format(score.incomePerPacket)}`}
+        text={`Income per Packet: ${currencyFormatter.format(
+          score.incomePerPacket
+        )}`}
         fill={CarmaTheme.font.color.darkest}
         fontFamily={CarmaTheme.font.family}
         fontSize={CarmaTheme.font.size.large}
         {...incomePerPacketBounds}
       />
     </Group>
-  )
+  );
 };

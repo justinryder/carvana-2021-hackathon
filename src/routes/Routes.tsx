@@ -1,8 +1,8 @@
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch } from "react-router-dom";
 import RoutePatterns from "./RoutePatterns";
-import {HomePage} from "./HomePage";
-import {PlayPage} from "./PlayPage";
-import {CreditsPage} from "./CreditsPage";
+import { HomePage } from "./HomePage";
+import { PlayPage } from "./PlayPage";
+import { CreditsPage } from "./CreditsPage";
 
 export const Routes = () => (
   <Switch>

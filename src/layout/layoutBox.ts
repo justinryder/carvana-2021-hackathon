@@ -1,6 +1,6 @@
-import {Align, Bounds} from "./types";
-import {alignBox} from "./alignBox";
-import {padBox} from "./padBox";
+import { Align, Bounds } from "./types";
+import { alignBox } from "./alignBox";
+import { padBox } from "./padBox";
 
 export type LayoutBoxArgs = {
   bounds: Bounds;
@@ -15,35 +15,21 @@ export const layoutBox = ({
   width,
   height,
   padding = 0,
-  align = 'top left',
+  align = "top left",
 }: LayoutBoxArgs) => {
-  return alignBox(
-    padBox(
-      bounds,
-      padding,
-    ),
-    align,
-    width,
-    height,
-  );
+  return alignBox(padBox(bounds, padding), align, width, height);
 };
 
-export const moveBelow = ({
-  bounds,
-  margin,
-}) => {
+export const moveBelow = ({ bounds, margin }) => {
   return {
     ...bounds,
     y: bounds.y + bounds.height + margin,
   };
 };
 
-export const moveRight = ({
-  bounds,
-  margin,
-}) => {
+export const moveRight = ({ bounds, margin }) => {
   return {
     ...bounds,
     x: bounds.x + bounds.width + margin,
   };
-}
+};

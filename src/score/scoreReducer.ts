@@ -1,5 +1,5 @@
-import ScoreActionTypes from './ScoreActionTypes';
-import {Score} from "./types";
+import ScoreActionTypes from "./ScoreActionTypes";
+import { Score } from "./types";
 
 export const initialState: Score = {
   packetsCompleted: 0,
@@ -10,7 +10,7 @@ export const initialState: Score = {
 type Action = {
   type: string;
   payload: Record<string, unknown>;
-}
+};
 
 export const scoreReducer = (state = initialState, action: Action) => {
   switch (action.type) {

@@ -1,4 +1,4 @@
-import ScoreActionTypes from './ScoreActionTypes';
+import ScoreActionTypes from "./ScoreActionTypes";
 
 const packetCompleted = () => ({
   type: ScoreActionTypes.PacketCompleted,
@@ -15,4 +15,4 @@ const upgradePurchased = (cost: number) => ({
 export default {
   packetCompleted,
   upgradePurchased,
-}
+};

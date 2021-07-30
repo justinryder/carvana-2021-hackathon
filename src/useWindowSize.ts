@@ -1,5 +1,5 @@
-import {useEffect, useState} from "react";
-import {bounds} from "./bounds";
+import { useEffect, useState } from "react";
+import { bounds } from "./bounds";
 
 export function useWindowSize() {
   // Initialize state with undefined width/height so server and client renders match
@@ -37,4 +37,4 @@ export function useWindowSize() {
 export const useWindowBounds = () => {
   const { width, height } = useWindowSize();
   return bounds(0, 0, width, height);
-}
+};

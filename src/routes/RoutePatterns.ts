@@ -1,5 +1,5 @@
 export default {
-  Home: '/',
-  Play: '/play',
-  Credits: '/credits',
+  Home: "/",
+  Play: "/play",
+  Credits: "/credits",
 };

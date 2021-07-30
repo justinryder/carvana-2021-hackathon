@@ -20,7 +20,7 @@ export const useAnimationFrame = (callback) => {
         dt = time - timerRef.current;
 
       const callback = callbackRef.current;
-      callback(dt/1000);
+      callback(dt / 1000);
 
       timerRef.current = time;
     };

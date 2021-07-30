@@ -1,4 +1,4 @@
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 import RoutePatterns from "./RoutePatterns";
 
 export const useLinks = () => {
@@ -9,4 +9,4 @@ export const useLinks = () => {
     routeToPlay: () => history.push(RoutePatterns.Play),
     routeToCredits: () => history.push(RoutePatterns.Credits),
   };
-}
+};

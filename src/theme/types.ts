@@ -84,7 +84,7 @@ export type Color = {
   team: TeamColor;
 };
 
-export type CarmaColor = Exclude<keyof Color, 'font' | 'team'>;
+export type CarmaColor = Exclude<keyof Color, "font" | "team">;
 
 export type CarmaThemeType = CarmaTheme;
 

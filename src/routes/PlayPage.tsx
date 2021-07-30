@@ -1,10 +1,10 @@
-import {Game} from "../Game";
-import {Provider} from "react-redux";
-import {store} from "../app/store";
-import {Layer, Rect} from "react-konva";
+import { Game } from "../Game";
+import { Provider } from "react-redux";
+import { store } from "../app/store";
+import { Layer, Rect } from "react-konva";
 import React from "react";
-import {CarmaTheme} from "../theme/CarmaTheme";
-import {useWindowBounds} from "../useWindowSize";
+import { CarmaTheme } from "../theme/CarmaTheme";
+import { useWindowBounds } from "../useWindowSize";
 
 export const PlayPage = () => {
   const windowBounds = useWindowBounds();
@@ -16,4 +16,4 @@ export const PlayPage = () => {
       </Layer>
     </Provider>
   );
-}
+};

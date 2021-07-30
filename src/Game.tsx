@@ -1,8 +1,16 @@
 import { Group } from "react-konva";
 import { UpgradeList } from "./upgrade/UpgradeList";
-import { completePacket } from "./upgrade/upgradeSlice";
+import {
+  completePacket,
+  getBuckets,
+  getEnvelopeCount,
+  getNextEnvelope,
+  getPackets,
+  openEnvelope,
+  updatePacket,
+} from "./upgrade/upgradeSlice";
 import { Score } from "./score/Score";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./app/store";
 import { Packet } from "./packets/Packet";
@@ -21,7 +29,10 @@ import {
   PACKET_WIDTH,
 } from "./constants";
 import { EnvelopeStack } from "./envelope/EnvelopeStack";
-import {Envelope} from "./envelope/Envelope";
+import { Envelope } from "./envelope/Envelope";
+import { debounce } from "lodash";
+import { Bin } from "./bin/Bin";
+import { getNewPacketBounds } from "./envelope/utils";
 
 const padding = 5;
 
@@ -37,63 +48,27 @@ export const Game = () => {
   );
   const dispatch = useDispatch();
 
-  const windowBounds = useWindowBounds();
-
-  const getNewPacketBounds = () =>
-    layoutBox({
-      bounds: windowBounds,
-      width: PACKET_WIDTH,
-      height: PACKET_HEIGHT,
-      align: "top center",
-      padding: 50,
-    });
-
-  const envelopes = useSelector((state: RootState) => state.upgrades.envelopes);
-  const packets = useSelector((state: RootState) => state.upgrades.packets);
-  console.log(packets);
-
-  // const [packetType, setPacketType] = useState(getNewPacketType());
-  // const [packetBounds, setPacketBounds] = useState(getNewPacketBounds);
-
-  const buckets = packetTypes.reduce((result, bucketType, index) => {
-    const isFirst = index === 0;
-
-    const bounds = isFirst
-      ? layoutBox({
-          bounds: windowBounds,
-          width: BUCKET_WIDTH,
-          height: BUCKET_HEIGHT,
-          padding: 25,
-          align: "bottom left",
+  const handlePacketDrag = useCallback(
+    debounce((event, packet) => {
+      dispatch(
+        updatePacket({
+          ...packet,
+          bounds: move(packet.bounds, event.target.x(), event.target.y()),
+          isDragging: true,
         })
-      : moveRight({
-          bounds: result[index - 1].bounds,
-          margin: PACKET_WIDTH + 15,
-        });
+      );
+    }, 10),
+    [dispatch]
+  );
 
-    const isPacketInBucket = false;//boxIntersection(bounds, packetBounds);
+  const envelopeCount = useSelector(getEnvelopeCount);
+  const nextEnvelope = useSelector(getNextEnvelope);
+  const packets = useSelector(getPackets);
+  const buckets = useSelector(getBuckets);
 
-    const packetMatch = false;//isPacketInBucket && packetType === bucketType;
-    const packetError = false;//isPacketInBucket && packetType !== bucketType;
-
-    let color = getPacketColor(bucketType);
-    if (packetMatch) {
-      color = CarmaTheme.color.success;
-    }
-    if (packetError) {
-      color = CarmaTheme.color.error;
-    }
-
-    result.push({
-      bucketType,
-      bounds,
-      packetMatch,
-      packetError,
-      color,
-    });
-
-    return result;
-  }, []);
+  const openTopEnvelope = () => {
+    dispatch(openEnvelope(nextEnvelope));
+  };
 
   return (
     <Group x={padding} y={padding}>
@@ -110,25 +85,33 @@ export const Game = () => {
         <UpgradeList x={0} y={105} />
       </Group>
 
+      <Bin
+        title={`Inbound Envelopes (${envelopeCount})`}
+        x={350}
+        y={0}
+        width={BUCKET_WIDTH}
+        height={BUCKET_HEIGHT}
+        hasEnvelope={Boolean(nextEnvelope)}
+        onClick={openTopEnvelope}
+      />
+
       {buckets.map((bucket) => (
         <Bucket
           key={bucket.bucketType}
           {...bucket.bounds}
-          label={getBucketLabel(bucket.bucketType)}
+          label={bucket.label}
           fill={bucket.color}
         />
       ))}
 
-      {envelopes.map((envelope, index) => (
-        <Envelope
-          key={envelope.id}
-          packetType={envelope.packet.packetType}
-          x={310 + (index * 5)}
-          y={10 + (index * 3)}
-          clickable={index === envelopes.length - 1}
-          envelope={envelope}
-        />
-      ))}
+      <Bin
+        title={`Opened Packets (${packets.length})`}
+        x={650}
+        y={0}
+        width={BUCKET_WIDTH}
+        height={BUCKET_HEIGHT}
+        hasEnvelope={false}
+      />
 
       {packets.map((packet) => (
         <Packet
@@ -137,53 +120,33 @@ export const Game = () => {
           draggable={true}
           x={packet.bounds.x}
           y={packet.bounds.y}
-          onDrag={(event) => {
-            // setPacketBounds(
-            //   move(packetBounds, event.target.x(), event.target.y())
-            // );
-          }}
+          onDrag={(event) => handlePacketDrag(event, packet)}
           onDragEnd={() => {
-            const bucketMatch = buckets.find((bucket) => bucket.packetMatch);
-            const bucketError = buckets.find((bucket) => bucket.packetError);
-
-            const isPackedInWindow = false;//boxIntersection(windowBounds, packetBounds);
-
-            if (bucketMatch) {
-              dispatch(completePacket(packet.packetType)); // TODO: maybe count packet types separately
-              // setPacketBounds(getNewPacketBounds());
-              // setPacketType(getNewPacketType());
-            } else if (!isPackedInWindow || bucketError) {
-              // setPacketBounds(getNewPacketBounds());
+            const bucketCollision = buckets.find(
+              (bucket: any) => bucket.packet?.id === packet.id
+            ) as any;
+            if (bucketCollision?.packetMatch) {
+              dispatch(completePacket(packet.id));
+            } else if (!packet.isInWindow || bucketCollision?.packetError) {
+              dispatch(
+                updatePacket({
+                  ...packet,
+                  isDragging: false,
+                  bounds: getNewPacketBounds(),
+                })
+              );
+              return;
             }
+
+            dispatch(
+              updatePacket({
+                ...packet,
+                isDragging: false,
+              })
+            );
           }}
         />
       ))}
-
-      {/*<EnvelopeStack x={packetBounds.x} y={packetBounds.y} />*/}
-
-      {/* <Packet
-        packetType={packetType}
-        draggable={true}
-        x={packetBounds.x}
-        y={packetBounds.y}
-        onDrag={(event) => {
-          setPacketBounds(
-            move(packetBounds, event.target.x(), event.target.y())
-          );
-        }}
-        onDragEnd={() => {
-          const bucketMatch = buckets.find((bucket) => bucket.packetMatch);
-          const bucketError = buckets.find((bucket) => bucket.packetError);
-
-          if (bucketMatch) {
-            dispatch(completePacket(packetType)); // TODO: maybe count packet types separately
-            setPacketBounds(getNewPacketBounds());
-            setPacketType(getNewPacketType());
-          } else if (!isPackedInWindow || bucketError) {
-            setPacketBounds(getNewPacketBounds());
-          }
-        }}
-      /> */}
     </Group>
   );
 };
