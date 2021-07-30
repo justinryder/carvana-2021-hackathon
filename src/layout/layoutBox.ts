@@ -37,3 +37,13 @@ export const moveBelow = ({
     y: bounds.y + bounds.height + margin,
   };
 };
+
+export const moveRight = ({
+  bounds,
+  margin,
+}) => {
+  return {
+    ...bounds,
+    x: bounds.x + bounds.width + margin,
+  };
+}
