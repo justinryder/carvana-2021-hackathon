@@ -65,7 +65,7 @@ export const Packet = ({
 
   const scalar = clicking ? 1.1 : 1;
 
-  const carWidth = 32;
+  const carWidth = 31;
 
   return (
     <Group
