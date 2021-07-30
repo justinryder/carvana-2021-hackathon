@@ -1,9 +1,10 @@
-import {Group, Layer, Text} from 'react-konva';
+import {Group, Layer, Rect, Text} from 'react-konva';
 import {Heading} from "./Heading";
 import {useWindowBounds} from "../useWindowSize";
 import {layoutBox, moveBelow} from "../layout/layoutBox";
 import {useCallback, useEffect, useLayoutEffect, useState} from "react";
 import {useAnimationFrame} from "../useAnimationFrame";
+import {CarmaTheme} from "../theme/CarmaTheme";
 
 
 // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
@@ -97,6 +98,7 @@ export const CreditsPage = () => {
 
   return (
     <Layer>
+      <Rect {...windowBounds} fill={CarmaTheme.color.background} />
       <Group
         {...windowBounds}
         y={offset}
