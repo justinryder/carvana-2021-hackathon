@@ -5,6 +5,7 @@ export type Packet = {
   id: string;
   packetType: PacketType;
   bounds: Bounds;
+  isDragging: boolean;
 };
 
 export type Envelope = {

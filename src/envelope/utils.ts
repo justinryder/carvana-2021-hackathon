@@ -27,6 +27,7 @@ export const makePacket = (): Packet => {
     id: uuid(),
     packetType: getNewPacketType(),
     bounds: getNewPacketBounds(),
+    isDragging: false,
   };
 };
 
