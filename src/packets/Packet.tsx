@@ -1,9 +1,12 @@
 // visual for an individual reg packet
 
 import {useState} from "react";
-import {KonvaNodeEvents, Rect, Group, TextPath, Line} from "react-konva";
+import {KonvaNodeEvents, Rect, Group, Text, TextPath, Line} from "react-konva";
 import Konva from "konva";
 import { CarmaTheme } from '../theme/CarmaTheme';
+import {PACKET_HEIGHT, PACKET_WIDTH} from "../constants";
+import {PacketType} from "./types";
+import {getPacketColor, getPacketTypeLabel} from "./PacketTypeLabelMap";
 
 type ShapeProps = {
   x: number;
@@ -21,6 +24,7 @@ type PacketProps = {
   onDragEnd: KonvaNodeEvents['onDragEnd'];
   backgroundColor?: string;
   textColor?: string;
+  packetType?: PacketType;
 } & ShapeProps;
 
 export const Packet = ({
@@ -30,12 +34,13 @@ export const Packet = ({
   textColor = CarmaTheme.font.color.white,
   x,
   y,
-  width = 85,
-  height = 100,
+  width = PACKET_WIDTH,
+  height = PACKET_HEIGHT,
   onClick,
   onDrag,
   onDragEnd,
-  draggable
+  draggable,
+  packetType = PacketType.Title,
 }: PacketProps) => {
   const [clicking, setClicking] = useState(false);
 
@@ -65,7 +70,7 @@ export const Packet = ({
 
   const scalar = clicking ? 1.1 : 1;
 
-  const carWidth = 31;
+  const carWidth = 45;
 
   return (
     <Group
@@ -92,34 +97,42 @@ export const Packet = ({
         height={height}
         x={0}
         y={0}
-        fill={backgroundColor}
+        fill={getPacketColor(packetType)}
+        stroke={CarmaTheme.font.color.dark}
+      />
+      <Text
+        text={getPacketTypeLabel(packetType)}
+        x={10}
+        y={10}
+        fill={CarmaTheme.color.white}
+        fontFamily={CarmaTheme.font.family}
+        fontStyle="bold"
+        fontSize={28}
       />
       <TextPath
         text={labelreg}
         fontFamily={CarmaTheme.font.family}
-        width={width}
-        height={height}
+        fontSize={CarmaTheme.font.size.large}
         x={10}
         y={0}
         fill={textColor}
         verticalAlign="middle"
         align="left"
         listening={false}
-        data={`M 0, ${height - 5} L 0, ${height - carWidth}`}
+        data={`M 5, ${height - 5} L 5, ${height - carWidth}`}
       />
       <TextPath
         text={labelbold}
         fontFamily={CarmaTheme.font.family}
+        fontSize={CarmaTheme.font.size.large}
         fontStyle="bold"
-        width={width}
-        height={height}
         x={10}
         y={0}
         fill={textColor}
         verticalAlign="middle"
         align="left"
         listening={false}
-        data={`M 0, ${height - carWidth} L 0, ${height - 80}`}
+        data={`M 5, ${height - carWidth} L 5, ${height - 100}`}
       />
       <Line
         stroke={"black"}
