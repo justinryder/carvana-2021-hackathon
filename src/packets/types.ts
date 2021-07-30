@@ -2,6 +2,6 @@ export enum PacketType {
   Trade = 'trade',
   Title = 'title',
   Registration = 'registration',
-  Stc = 'stc',
+  Treasury = 'treasury',
   Cats = 'cats',
 }
