@@ -108,12 +108,13 @@ export const Game = () => {
         onClick={openTopEnvelope}
       />
 
-      {buckets.map((bucket) => (
+      {buckets.map((bucket: any) => (
         <Bucket
           key={bucket.bucketType}
           {...bucket.bounds}
           label={bucket.label}
           fill={bucket.color}
+          stroke={bucket.borderColor}
           packetType={bucket.bucketType}
         />
       ))}

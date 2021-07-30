@@ -34,6 +34,7 @@ export const Bucket: FunctionComponent<BucketProps> = ({
         height={height}
         fill={fill}
         stroke={stroke}
+        strokeWidth={10}
       />
       <Text
         text={label}

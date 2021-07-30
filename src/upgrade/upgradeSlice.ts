@@ -241,16 +241,18 @@ export const getBuckets = createSelector(
             isPacketInBucket && packet.packetType !== bucket.bucketType;
 
           let color = getPacketColor(bucket.bucketType);
+          let borderColor = CarmaTheme.color.black;
           if (packetMatch) {
-            color = CarmaTheme.color.success;
+            borderColor = 'green';
           }
           if (packetError) {
-            color = CarmaTheme.color.error;
+            borderColor = 'red';
           }
 
           return {
             ...bucket,
-            color,
+            color: getPacketColor(bucket.bucketType),
+            borderColor,
             isPacketInBucket,
             packetMatch,
             packetError,
