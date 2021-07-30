@@ -17,7 +17,7 @@ export const PacketTypeColorMap = {
   [PacketType.Title]: CarmaTheme.color.callToAction,
   [PacketType.Registration]: CarmaTheme.color.warning,
   [PacketType.Treasury]: CarmaTheme.color.success,
-  [PacketType.Cats]: CarmaTheme.color.team.insideAdvocate,
+  [PacketType.Cats]: CarmaTheme.color.team.executiveResolution,
 };
 
 export const getPacketColor = (packetType: PacketType) =>

@@ -81,7 +81,7 @@ export const HomePage = () => {
           fill={CarmaTheme.color.background}
           stroke={CarmaTheme.color.border}
         />
-        <Heading text="Reg Packets, Please" fontSize={42} {...headingBounds} />
+        <Heading text="Packets, Please" fontSize={42} {...headingBounds} />
         <Heading
           text="Built By Team 115 Degrees"
           fontSize={CarmaTheme.font.size.xlarge}

@@ -101,6 +101,7 @@ export const Game = () => {
           {...bucket.bounds}
           label={bucket.label}
           fill={bucket.color}
+          packetType={bucket.bucketType}
         />
       ))}
 
@@ -126,7 +127,7 @@ export const Game = () => {
               (bucket: any) => bucket.packet?.id === packet.id
             ) as any;
             if (bucketCollision?.packetMatch) {
-              dispatch(completePacket(packet.id));
+              dispatch(completePacket(packet));
             } else if (!packet.isInWindow || bucketCollision?.packetError) {
               dispatch(
                 updatePacket({

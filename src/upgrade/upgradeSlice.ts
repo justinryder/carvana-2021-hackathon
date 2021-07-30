@@ -17,6 +17,7 @@ export type UpgradeState = {
   upgrades: Upgrade[];
   money: number;
   packetsComplete: number;
+  packetsCompleteByType: Record<PacketType, number>;
   packets: Packet[];
   envelopes: Envelope[];
   buckets: Array<{
@@ -29,6 +30,13 @@ const initialState: UpgradeState = {
   upgrades: upgrades,
   money: 0,
   packetsComplete: 0,
+  packetsCompleteByType: {
+    [PacketType.Registration]: 0,
+    [PacketType.Title]: 0,
+    [PacketType.Trade]: 0,
+    [PacketType.Treasury]: 0,
+    [PacketType.Cats]: 0,
+  },
   packets: [],
   envelopes: createWorkForDay(30),
   buckets: Object.values(PacketType).map((bucketType) => ({
@@ -55,12 +63,16 @@ export const upgradeSlice = createSlice({
         money: state.money - action.payload.cost,
       };
     },
-    completePacket: (state, action: PayloadAction<string>) => {
+    completePacket: (state, action: PayloadAction<Packet>) => {
       return {
         ...state,
         money: state.money + 1,
         packetsComplete: state.packetsComplete + 1,
-        packets: state.packets.filter((packet) => packet.id !== action.payload),
+        packetsCompleteByType: {
+          ...state.packetsCompleteByType,
+          [action.payload.packetType]: state.packetsCompleteByType[action.payload.packetType] + 1,
+        },
+        packets: state.packets.filter((packet) => packet.id !== action.payload.id),
       };
     },
     openEnvelope: (state: UpgradeState, action: PayloadAction<Envelope>) => {
@@ -145,6 +157,10 @@ export const getPacketsComplete = createSelector(
   [getState],
   (state) => state.packetsComplete
 );
+
+export const getPacketsCompleteByType = createSelector([
+  getState,
+], state => state.packetsCompleteByType);
 
 export const _getPackets = createSelector([getState], (state) => state.packets);
 
