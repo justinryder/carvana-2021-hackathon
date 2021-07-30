@@ -2,6 +2,8 @@
 
 http://packets-please.com/
 
+Packets, Please is a game about opening, sorting, and automating packets. Built with ♥ by Team 115 Degrees for the 2021 Carvana Hackathon.
+
 ## Team 115 Degrees
 
 * Cesar Avitia
